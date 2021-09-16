@@ -1,5 +1,6 @@
 import React from 'react'
 import { Col, Row, Nav, Navbar, Container, Button } from "react-bootstrap";
+import { Link } from 'react-router-dom';
 
 import Style from './Empty_Cart.module.css'
 const Empty_Cart = () => {
@@ -12,9 +13,9 @@ const Empty_Cart = () => {
                 </div>
                 <h1 className={Style.emptyTxt}>Your Cart is Empty! </h1>
                     <span className={Style.spanText}> Looks like you haven't made order yet</span> <br></br>
-              <a href="/Cart">  <button className={Style.pbtn}>
+              <Link href="/Cart">  <button className={Style.pbtn}>
                 Continue to Shopping
-                </button></a>
+                </button></Link>
                 </center>
 
             </Container>

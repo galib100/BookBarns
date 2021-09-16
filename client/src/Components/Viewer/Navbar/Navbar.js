@@ -41,7 +41,7 @@ const Nav1 = ({ loginSignupModalToggle }) => {
               />{" "}
               </Link>
               {""}
-              <Link to='/' href="" className={Style.brand_text}>
+              <Link to='./' href="" className={Style.brand_text}>
                 {" "}
                 Book Barns
               </Link>

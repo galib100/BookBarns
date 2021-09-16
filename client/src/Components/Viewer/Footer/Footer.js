@@ -14,7 +14,13 @@ const Footer = () => {
             <Container>
                 <Row className={`${Style.frtRow} justify-content-md-center`}>
                     <Col xs={4} className={`${Style.frtTxt}`}>
-                    <img src="./images/logo.jpg" alt="BookBarnsLogo" className='pb-3 mb-4'/>
+                    <img 
+                    src="./images/logo.jpg"
+                     alt="BookBarnsLogo"
+                     width="150"
+                     height="100"
+                      className='pb-3 mb-4'
+                      />
                     <h6 className='pb-1'>
                     Rajshahi University of Engineering & Technology
                     <br />
