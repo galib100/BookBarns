@@ -1,0 +1,87 @@
+.cartPage{
+    background:#F1F2F4;
+}
+.CartHead{
+    width:100%;
+    height: 100px;
+    background:#FFFFFF;
+    padding:20px;
+}
+.CartHeadText{
+    font-size:33px;
+    color:#222222;
+    weight:500;
+    
+}
+.totalText{
+font-size:22px;
+
+}
+.savingText{
+    font-size:18px;
+    color:var(--color-brown-light)
+}
+.CartPart{
+    width:100%;
+    background: #FFFFFF;
+    margin-bottom:40px;
+}
+.ChekBox{
+    height:25px !important;
+    width:27px !important;
+   padding:70px 0 !important;
+   margin-top: 50px;
+}
+.imgcart{
+    width:128px !important;
+    height:141px !important;
+}
+.amtFiled{
+    height:35px;
+    width:50px;
+    border:1px solid #DEE2E6;
+    
+}
+.tkTxt{
+    clear: both;
+    display: inline-block !important;
+    overflow: hidden !important;
+}
+.muteTxt{
+  text-decoration: line-through;
+  font-size:16px;
+  color:#D3D3D3;
+}
+.plusMinus{
+    height:35px !important;
+    width:35px !important;
+    background:#F5F5F5;
+    outline:none !important;
+    border: 1px solid #DEE2E6;
+    box-shadow:none;
+    
+}
+.odrBtn{
+    width: 260px;
+    height: 60px;
+    padding:10px;
+    background:var(--color-brown);
+    margin-bottom:104px;
+    float:right !important;
+    color:var(--color-white);
+    font-size:22px;
+    margin-right:20px;
+    weight:400;
+    border:none!important
+}
+.shipingAdd{
+    font-size:16px!important;
+    color:#787878;
+}
+.addTitle{
+    font-size:22px !important;
+    color:#393939!important;
+    padding-top:15px;
+    margin-top:10px;
+    margin-bottom:0px !important;
+}

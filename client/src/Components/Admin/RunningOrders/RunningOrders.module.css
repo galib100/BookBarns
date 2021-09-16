@@ -1,0 +1,141 @@
+.search__wrapper {
+  background: var(--color-primary-light);
+  padding: 5px 10px;
+  color: var(--color-secondary);
+  margin-right: 15px;
+  height: 32px;
+  font-size: 16px !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search {
+  outline: none;
+  border: none;
+  background: transparent;
+  color: var(--color-secondary);
+  min-width: 250px;
+}
+
+.select {
+  outline: none !important;
+  border: none !important;
+  background: transparent !important;
+  height: 32px !important;
+  padding: 0 10px !important;
+  color: var(--color-secondary) !important;
+}
+
+.new__book {
+  height: 40px !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  text-decoration: none;
+}
+
+.new__book:hover {
+  text-decoration: none;
+  color: var(--color-white);
+}
+
+.icons {
+  font-size: 28px !important;
+  line-height: 16px !important;
+  padding-right: 15px;
+  color: var(--color-secondary);
+  cursor: pointer;
+}
+
+.icons:hover {
+  color: var(--color-primary);
+}
+
+.icons:last-child:hover {
+  color: var(--danger);
+}
+
+.confirm {
+  background: rgb(45, 75, 179);
+  background: linear-gradient(
+    135deg,
+    rgba(45, 75, 179, 1) 0%,
+    rgba(72, 107, 225, 1) 100%
+  );
+  padding: 3px;
+  color: var(--color-white);
+  text-transform: capitalize;
+  cursor: pointer;
+  transition: 0.3s all ease-in-out;
+}
+
+.pending {
+  background: rgb(45, 175, 179);
+  background: linear-gradient(
+    135deg,
+    rgb(45, 175, 179) 0%,
+    rgb(2, 89, 90) 100%
+  );
+  padding: 3px;
+  color: var(--color-white);
+  text-transform: capitalize;
+  cursor: pointer;
+  transition: 0.3s all ease-in-out;
+}
+
+.processing {
+  background: rgb(104, 29, 126);
+  background: linear-gradient(
+    135deg,
+    rgba(104, 29, 126, 1) 0%,
+    rgba(170, 54, 204, 1) 100%
+  );
+  text-transform: capitalize;
+  padding: 3px;
+  color: var(--color-white);
+  cursor: pointer;
+  transition: 0.3s all ease-in-out;
+}
+.shipped {
+  background: rgb(235, 101, 25);
+  background: linear-gradient(
+    135deg,
+    rgba(235, 101, 25, 1) 0%,
+    rgba(235, 101, 25, 1) 100%
+  );
+  text-transform: capitalize;
+  padding: 3px;
+  color: var(--color-white);
+  cursor: pointer;
+  transition: 0.3s all ease-in-out;
+}
+.delivered {
+  background: rgb(27, 138, 35);
+  background: linear-gradient(
+    135deg,
+    rgba(27, 138, 35, 1) 0%,
+    rgba(72, 225, 77, 1) 100%
+  );
+  text-transform: capitalize;
+  padding: 3px;
+  color: var(--color-white);
+  cursor: pointer;
+  transition: 0.3s all ease-in-out;
+}
+
+.confirm:hover,
+.processing:hover,
+.processing:hover,
+.shipped:hover,
+.delivered:hover {
+  box-shadow: 3px 3px 3px 0 rgba(0, 0, 0, 0.4);
+  transition: 0.3s all ease-in-out;
+}
+
+@media screen and (max-width: 767px) {
+  .search__wrapper {
+    width: 100%;
+  }
+}

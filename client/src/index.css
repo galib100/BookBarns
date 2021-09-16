@@ -1,0 +1,49 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap");
+
+:root {
+  --color-dark: #222222;
+  --color-secondary: #777777;
+  --color-brown: #138ea3;
+  --color-brown-light: #0dccee;
+  --color-primary: #486be1;
+  --color-purple: #6c63ff;
+  --color-primary-light: #e4f6ff;
+  --color-light: #f0f0f0;
+  --color-white: #ffffff;
+}
+
+body {
+  margin: 0;
+  font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Roboto",
+    "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+    "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  --light: #f5f5f5 !important;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.primary__btn {
+  background: var(--color-brown);
+  color: var(--color-white);
+  font-size: 20px;
+  border: none;
+  outline: none;
+  padding: 15px 30px;
+  cursor: pointer;
+  transition: 0.3s all ease-in-out;
+}
+
+.primary__btn:hover {
+  background: var(--color-brown-light);
+  color: var(--color-white) !important;
+  text-decoration: none !important;
+  transition: 0.3s all ease-in-out;
+}
+#viewer_nav .nav-link{
+text-decoration: none !important;
+}

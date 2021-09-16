@@ -1,0 +1,95 @@
+.crd {
+  background: var(--color-white);
+  border: none !important;
+}
+
+.img__wrapper {
+  margin: 0 auto;
+  max-width: 80px;
+  max-height: 200px;
+  overflow: hidden;
+}
+
+.cat {
+  color: var(--color-brown);
+  font-size: 14px;
+}
+
+.title {
+  font-size: 16px;
+}
+
+.author {
+  color: var(--color-brown-light);
+  font-size: 14px;
+}
+
+.price {
+  font-weight: 600;
+}
+
+.operations {
+  background: #222222c7 !important;
+  display: flex !important;
+  justify-content: flex-end !important;
+  align-items: center !important;
+  font-size: 24px !important;
+  color: var(--color-white) !important;
+}
+
+.icon {
+  transition: 0.3s all ease-in-out;
+}
+
+.icon:hover {
+  color: var(--danger);
+  cursor: pointer;
+  transition: 0.3s all ease-in-out;
+}
+
+.icon2 {
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: var(--color-white);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin-right: 8px;
+  transition: 0.3s all ease-in-out;
+}
+
+.icon2:hover {
+  background: var(--primary);
+  cursor: pointer;
+  transition: 0.3s all ease-in-out;
+}
+
+.pen {
+  font-size: 10px;
+  color: #222222c7 !important;
+}
+
+.add__crd {
+  background: #222222c7 !important;
+  min-height: 300px;
+  height: 100%;
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 55px;
+  color: var(--color-white);
+  transition: 0.3s all ease-in-out;
+}
+
+.add__crd:hover {
+  color: var(--info);
+  transition: 0.3s all ease-in-out;
+  cursor: pointer;
+}
+
+.add__text {
+  font-size: 20px;
+}

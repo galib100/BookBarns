@@ -1,0 +1,45 @@
+.FtrSec{
+    margin-top: 200px;
+}
+.frtRow{
+    margin-bottom:130px;
+    margin-top:40px;
+}
+
+.foot_img{
+padding: 15px;
+}
+.footText{
+    color:#73706E !important;
+    font-size:18px ;
+    margin-top:85px !important;
+}
+.frtTxt{
+    color:#73706E !important;
+}
+.frtIcon{
+    color:var(--color-brown) !important;
+    font-size:20px !important;
+}
+.assciateTxt{
+    font-size:20px !important;
+    font-weight:400;
+    margin-bottom:80px;
+
+}
+
+.listText{
+    padding-bottom: 20px;
+    text-decoration: none !important;
+    color:#73706E !important;
+}
+.lastLine{
+    margin-bottom: 60px;
+    font-style: 18px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+.lastHr{
+    height: 5px;
+    background: var(--color-brown);
+    margin-bottom:0px !important;
+}

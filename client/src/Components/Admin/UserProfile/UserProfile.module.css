@@ -1,0 +1,47 @@
+.crd {
+  background: var(--color-white);
+  border: 1px solid #dddddd !important;
+}
+
+.icon {
+  width: 24px !important;
+  height: 24px !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background: #222222;
+  color: #ffffff;
+  font-size: 14px;
+  margin-right: 4px;
+}
+
+.crd__img__section {
+  height: 44px;
+  padding: 5px;
+  width: auto;
+  border-radius: 22px;
+  background: #f2f2f2;
+}
+
+.reviewer {
+  padding-left: 4px;
+  font-size: 14px;
+  color: #222222;
+  font-weight: 600;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--color-dark);
+}
+
+.description {
+  font-size: 14px;
+}
+
+.time {
+  font-size: 14px;
+  color: #8a7d75;
+}
