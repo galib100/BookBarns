@@ -33,7 +33,7 @@ const Nav1 = ({ loginSignupModalToggle }) => {
             <Navbar.Brand href="#home" className="">
               <img
                 alt="brand logo"
-                src="./images/"
+                src="./images/logo.jpg"
                 width="78"
                 height="78"
                 className="pb-2"
