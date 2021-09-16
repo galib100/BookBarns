@@ -53,7 +53,7 @@ const Nav1 = ({ loginSignupModalToggle }) => {
               <div className="input-group  ">
                 <input
                   type="text"
-                  placeholder="  Search..."
+                  placeholder="  Search...."
                   className={`${Style.searchForm}`}
                 />
 
