@@ -16,7 +16,7 @@ const Error = () => {
                 </div>
                 <h1 className={Style.errorTxt}>Bad Gateway</h1>
               <Link to="./">  <button className={Style.pbtn}>
-                Back
+               Go Back
                 </button></Link>
                 </center>
 

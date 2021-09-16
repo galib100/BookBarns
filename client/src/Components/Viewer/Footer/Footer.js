@@ -17,7 +17,7 @@ const Footer = () => {
                     <img 
                     src="./images/logo.jpg"
                      alt="BookBarnsLogo"
-                     width="150"
+                     width="150"   
                      height="100"
                       className='pb-3 mb-4'
                       />
