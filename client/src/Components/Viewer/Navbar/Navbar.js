@@ -31,24 +31,26 @@ const Nav1 = ({ loginSignupModalToggle }) => {
         <Row>
           <Col md={2} sm={6}>
             <Navbar.Brand href="#home" className="">
-              <img
+             <Link to='/'>
+             <img
                 alt="brand logo"
                 src="./images/logo.jpg"
                 width="78"
                 height="78"
                 className="pb-2"
               />{" "}
+              </Link>
               {""}
-              <a href="" className={Style.brand_text}>
+              <Link to='/' href="" className={Style.brand_text}>
                 {" "}
                 Book Barns
-              </a>
+              </Link>
             </Navbar.Brand>
           </Col>
 
-          <Col md={5} sm={6} className="align-self-center">
-            <Form inline>
-              <div className="input-group">
+          <Col md={5} sm={6} className="align-self-center ">
+            <Form inline className='float-right'>
+              <div className="input-group  ">
                 <input
                   type="text"
                   placeholder="  Search..."
@@ -66,7 +68,7 @@ const Nav1 = ({ loginSignupModalToggle }) => {
             </Form>
           </Col>
           <Col md={4} sm={6} className="align-self-center mr-o">
-            <Nav className="">
+            <Nav className="float-right">
               <Link to="/wishlist" className="text-dark mr-3">
                 {" "}
                 <i className="fa-lg"><FiHeart/></i> Wishlist <br></br>{" "}
