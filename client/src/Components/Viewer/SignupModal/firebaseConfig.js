@@ -2,14 +2,15 @@ import firebase from "firebase/app";
 import "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBaYqQWra4SxRl1sd19CAPGeF3Q5IN1XQk",
-  authDomain: "obosor-15adc.firebaseapp.com",
-  projectId: "obosor-15adc",
-  storageBucket: "obosor-15adc.appspot.com",
-  messagingSenderId: "797371677094",
-  appId: "1:797371677094:web:f402b7fa7de875db66b767",
-  measurementId: "G-42D131PSYE",
+  apiKey: "AIzaSyAQy4aCXsVaeEWlgldXqDHGBa7RfkDafjU",
+  authDomain: "bookburns-9de3f.firebaseapp.com",
+  projectId: "bookburns-9de3f",
+  storageBucket: "bookburns-9de3f.appspot.com",
+  messagingSenderId: "600672668177",
+  appId: "1:600672668177:web:bc311282f0aefeae19ffb0",
+  measurementId: "G-JGP1X3CVQ8"
 };
+
 
 firebase.initializeApp(firebaseConfig);
 export default firebase;
