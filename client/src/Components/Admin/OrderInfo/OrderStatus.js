@@ -1,5 +1,4 @@
 import React from "react";
-import { useState } from "react";
 import placedImg from "../../../Assets/Admin/Order/clipboard.png";
 import pendingImg from "../../../Assets/Admin/Order/pending.png";
 import confirmImg from "../../../Assets/Admin/Order/planner.png";
@@ -7,23 +6,54 @@ import processingImg from "../../../Assets/Admin/Order/process.png";
 import shippedImg from "../../../Assets/Admin/Order/shipped.png";
 import deliveredImg from "../../../Assets/Admin/Order/delivery.png";
 import styles from "./OrderInfo.module.css";
+import { connect } from "react-redux";
+import swal from "sweetalert";
+import { editOrderStatus } from "../../../Actions/Admin/OrderItemActions";
+import { useState } from "react";
+import { useEffect } from "react";
 
-const OrderStatus = ({ status }) => {
-  let stat = 0;
-  if (status === "placed") {
-    stat = 1;
-  } else if (status === "pending") {
-    stat = 2;
-  } else if (status === "confirmed") {
-    stat = 3;
-  } else if (status === "processing") {
-    stat = 4;
-  } else if (status === "shipped") {
-    stat = 5;
-  } else if (status === "delivered") {
-    stat = 6;
-  }
-  console.log(stat);
+const OrderStatus = ({ order, editOrderStatus }) => {
+  let status = order.status.toLowerCase();
+  const [stat, setStat] = useState(0);
+
+  useEffect(() => {
+    if (status === "placed") {
+      setStat(1);
+    } else if (status === "pending") {
+      setStat(2);
+    } else if (status === "confirm") {
+      setStat(3);
+    } else if (status === "processing") {
+      setStat(4);
+    } else if (status === "shipped") {
+      setStat(5);
+    } else if (status === "delivered") {
+      setStat(6);
+    }
+  }, [status]);
+
+  const capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
+
+  const statusHandeler = (newStatus, active) => {
+    if (newStatus.toLowerCase() === order.status.toLowerCase()) {
+      swal(`Can not update to the same status`, {
+        icon: "warning",
+      });
+    } else {
+      let flag = editOrderStatus(capitalizeFirstLetter(newStatus), order.id);
+      if (flag) {
+        swal("Status Updated!", {
+          icon: "success",
+        });
+      } else {
+        swal("Something Went Wrong", {
+          icon: "warning",
+        });
+      }
+    }
+  };
   return (
     <div>
       <div
@@ -43,7 +73,10 @@ const OrderStatus = ({ status }) => {
             Order Placed
           </span>
         </div>
-        <button className={`${styles.confirm} ${stat >= 1 && styles.active}`}>
+        <button
+          className={`${styles.confirm} ${stat >= 1 && styles.active}`}
+          onClick={() => statusHandeler("Placed", stat >= 1)}
+        >
           Confirm
         </button>
       </div>
@@ -61,10 +94,13 @@ const OrderStatus = ({ status }) => {
           <span
             className={`${styles.status_text} ${stat >= 2 && styles.active}`}
           >
-            Order Placed
+            Order Pending
           </span>
         </div>
-        <button className={`${styles.confirm} ${stat >= 2 && styles.active}`}>
+        <button
+          className={`${styles.confirm} ${stat >= 2 && styles.active}`}
+          onClick={() => statusHandeler("Pending", stat >= 2)}
+        >
           Confirm
         </button>
       </div>
@@ -85,7 +121,10 @@ const OrderStatus = ({ status }) => {
             Order Confirm
           </span>
         </div>
-        <button className={`${styles.confirm} ${stat >= 3 && styles.active}`}>
+        <button
+          className={`${styles.confirm} ${stat >= 3 && styles.active}`}
+          onClick={() => statusHandeler("Confirm", stat >= 3)}
+        >
           Confirm
         </button>
       </div>
@@ -106,7 +145,10 @@ const OrderStatus = ({ status }) => {
             Order Processing
           </span>
         </div>
-        <button className={`${styles.confirm} ${stat >= 4 && styles.active}`}>
+        <button
+          className={`${styles.confirm} ${stat >= 4 && styles.active}`}
+          onClick={() => statusHandeler("Processing", stat >= 4)}
+        >
           Confirm
         </button>
       </div>
@@ -127,7 +169,10 @@ const OrderStatus = ({ status }) => {
             Order Shipped
           </span>
         </div>
-        <button className={`${styles.confirm} ${stat >= 5 && styles.active}`}>
+        <button
+          className={`${styles.confirm} ${stat >= 5 && styles.active}`}
+          onClick={() => statusHandeler("Shipped", stat >= 5)}
+        >
           Confirm
         </button>
       </div>
@@ -148,12 +193,17 @@ const OrderStatus = ({ status }) => {
             Order Delivered
           </span>
         </div>
-        <button className={`${styles.confirm} ${stat >= 6 && styles.active}`}>
+        <button
+          className={`${styles.confirm} ${stat >= 6 && styles.active}`}
+          onClick={() => statusHandeler("Delivered", stat >= 6)}
+        >
           Confirm
         </button>
       </div>
     </div>
   );
 };
-
-export default OrderStatus;
+const mapStateToProps = (state) => ({
+  order: state.admin_orders.selected_order_admin,
+});
+export default connect(mapStateToProps, { editOrderStatus })(OrderStatus);

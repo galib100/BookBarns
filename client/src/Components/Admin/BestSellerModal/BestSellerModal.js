@@ -2,11 +2,21 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { Modal } from "react-bootstrap";
 import swal from "sweetalert";
-import { bestSellerModalToggleAction } from "../../../Actions/Admin/BestSellerActions";
+import {
+  bestSellerAdd,
+  bestSellerEdit,
+  bestSellerModalToggleAction,
+} from "../../../Actions/Admin/BestSellerActions";
 import styles from "./BestSellerModal.module.css";
-import data from "../data/bestSellerBook";
 
-const BestSellerModal = ({ bestSellerModalToggleAction, open, book }) => {
+const BestSellerModal = ({
+  bestSellerModalToggleAction,
+  bestSellerAdd,
+  bestSellerEdit,
+  open,
+  book,
+  data,
+}) => {
   const [selectedBook, setSelectedBook] = useState(book ? book : {});
   const [search, setSearch] = useState("");
   const [list, setList] = useState([]);
@@ -21,12 +31,20 @@ const BestSellerModal = ({ bestSellerModalToggleAction, open, book }) => {
     e.preventDefault();
     if (book) {
       //Edit BOOK SUBMIT ACTION CALL
+      bestSellerEdit(book._id, selectedBook._id);
       swal("Book Modified!", "", "success");
+      handleClose();
     } else {
-      //ADD BOOK SUBMIT ACTION CALL
-      swal("Book Added!", "", "success");
+      if (selectedBook._id) {
+        //ADD BOOK SUBMIT ACTION CALL
+        bestSellerAdd(selectedBook._id);
+        //console.log(selectedBook);
+        swal("Book Added!", "", "success");
+        handleClose();
+      } else {
+        swal("Please select a book", "", "info");
+      }
     }
-    bestSellerModalToggleAction();
   };
 
   const onChangeHandeler = (text) => {
@@ -43,13 +61,15 @@ const BestSellerModal = ({ bestSellerModalToggleAction, open, book }) => {
   };
 
   const selectItem = (id) => {
-    setSelectedBook(...data.filter((item) => item.id === id));
+    setSelectedBook(...data.filter((item) => item._id === id));
     setList([]);
+    setSearch(data.filter((item) => item._id === id)[0].title);
   };
 
   const handleClose = () => {
     bestSellerModalToggleAction();
     setSelectedBook({});
+    setSearch("");
   };
 
   return (
@@ -70,7 +90,7 @@ const BestSellerModal = ({ bestSellerModalToggleAction, open, book }) => {
           <div className="list-group">
             {list.map((item) => (
               <div key={item.id} className={`${styles.item} list-group-item`}>
-                <span onClick={() => selectItem(item.id)}>{item.title}</span>
+                <span onClick={() => selectItem(item._id)}>{item.title}</span>
               </div>
             ))}
           </div>
@@ -109,10 +129,13 @@ const BestSellerModal = ({ bestSellerModalToggleAction, open, book }) => {
 };
 
 const mapStateToProps = (state) => ({
-  open: state.admin_page.best_seller_modal,
-  book: state.admin_page.best_seller_book,
+  open: state.admin_book_page.best_seller_modal,
+  book: state.admin_book_page.best_seller_book,
+  data: state.admin_book_page.books,
 });
 
-export default connect(mapStateToProps, { bestSellerModalToggleAction })(
-  BestSellerModal
-);
+export default connect(mapStateToProps, {
+  bestSellerModalToggleAction,
+  bestSellerAdd,
+  bestSellerEdit,
+})(BestSellerModal);

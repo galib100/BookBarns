@@ -1,0 +1,686 @@
+/* ///////////////////////////////////////////////////////////////////////////////////////////////// */
+/* =========================================== BOOK CARDS ========================================== */
+.CardBook {
+  min-height: 400px !important;
+  margin-top: 50px;
+  position: relative !important;
+  border: 1px solid #eae8e4;
+  overflow: hidden;
+}
+.fromViewBook{
+  width: 20%;
+}
+.fromLanding{
+  width: 100%;
+}
+.CardBook:hover .cartBody {
+  top: 100px;
+  box-shadow: -0px -5px 5px -5px #222222;
+}
+.book, .bookLoading {
+  height: 200px !important;
+  width: 130px !important;
+  position: absolute;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.bookLoading{
+  width: 150px !important;
+}
+.cartBody {
+  position: absolute;
+  top: 230px;
+  left: 0;
+  width: 100%;
+  padding: 20px 2rem;
+  background-color: var(--color-white);
+  transition: 0.4s;
+}
+.cartBody h4 {
+  font-size: 14px;
+  line-height: 14px;
+  font-weight: lighter !important;
+  text-transform: uppercase;
+}
+.cartBody a p{
+  text-decoration: none;
+  font-size: 20px;
+  line-height: 20px;
+  font-weight: normal;
+  color: #222222;
+  transition: 0.4s;
+}
+.cartBody a:hover{
+  text-decoration: none;
+  color: #555;
+}
+.cartBody p {
+  font-size: 15px;
+  line-height: 15px;
+  color: var(--color-brown-light);
+}
+.tk {
+  font-size: 32px !important;
+  color: #222222 !important;
+  font-weight: 500;
+}
+.tk span {
+  font-size: 12px;
+  font-weight: lighter !important;
+}
+.tk strike{
+  font-size: 16px;
+  color: #ccc;
+}
+
+/* button container */
+.buttonContainer {
+  margin-top: 35px !important;
+  display: flex;
+  justify-content: space-between !important;
+  align-items: center !important;
+}
+.buttonContainer .addToCarBtn {
+  width: 65%;
+  outline: none !important;
+  border: none !important;
+  background: #d2935a;
+  color: #fff;
+  text-align: center;
+  font-size: 13px;
+  padding: 10px 20px;
+  margin-top: 10px;
+  font-weight: 600;
+  transition: 0.4s;
+  cursor: pointer;
+}
+.buttonContainer .addedToCarBtn{
+  background: transparent;
+  color: var(--color-brown) !important;
+  border: 1.3px solid var(--color-brown) !important;
+}
+.buttonContainer .addToCarBtn:hover{
+  background: var(--color-brown);
+  color: #fff !important;
+}
+.buttonContainer .heart {
+  cursor: pointer;
+  color: gray;
+  font-size: 20px;
+}
+.buttonContainer .heartcolored{ color: red; }
+.shareOptions, .fromshareOptions{
+  width: fit-content;
+  margin-top: 10px;
+  padding: 10px 0;
+}
+.shareOptions button,
+.fromshareOptions button {
+  margin-right: 6px;
+  transition: 0.7s;
+  transition-timing-function: ease-in-out;
+}
+.shareOptions button{
+  margin-top: 0;
+  opacity: 1;
+}
+.fromshareOptions button{
+  margin-top: 25px;
+  opacity: 0;
+}
+/* ///////////////////////////////////////////////////////// */
+/* ====================== TOP TEXT ======================*/
+.topText {
+  padding: 10px 76px;
+  display: flex !important;
+  align-items: center;
+  font-size: 18px !important;
+  color: #222222 !important;
+  border-bottom: 1px solid #ccc;
+}
+.topText a {
+  text-decoration: none;
+  color: #222222 !important;
+}
+
+/* ///////////////////////////////////////////////////////////////////////////////////////////////// */
+/* =========================================== BOOK DETAILS ========================================== */
+.bookDetailContainer { padding: 50px 76px; min-height: 80vh; }
+.bookdetails { display: flex; flex-wrap: wrap; }
+
+/* bookdetails - book images */
+.bookImage {
+  width: 30%;
+  min-height: 50vh;
+  display: flex;
+  /*align-items: center; */
+  justify-content: center;
+}
+.bookImage img{ width: 260px; height: 374px; }
+
+/* bookdetails - basic info */
+.bookInfo{ width: 40%; min-height: 50vh; }
+.bookInfo{ padding: 20px; }
+.title{ font-size: 1.7rem; }
+.author{ font-size: 16px; font-weight: normal; margin: 10px 0 30px 0; color: var(--color-brown);}
+.author span{ font-weight: 500; }
+.priceContainer{ display: flex; align-items: flex-end; margin-bottom: 20px; }
+.priceContainer h1{ font-size: 30px; line-height: 30px; }
+.priceContainer h1 span{ font-size: 15px; line-height: 15px; font-weight: lighter; margin-left: 5px;}
+.priceContainer h4{ font-size: 14px; font-weight: 500; margin-left: 10px; }
+.priceContainer h5 { font-size: 17px; color: gray; margin-left: 45px; }
+.btncont{ display: flex; align-items: center; margin-top: 20px; }
+.incrementalButton{ display: flex; margin-right: 30px;}
+.incrementalButton div{ 
+  width: 50px; height: 50px; 
+  border: 1px solid #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.incrementalButton div:nth-child(2){ cursor: default; }
+.btncont button{
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 60px;
+  outline: none;
+  border: none;
+  background-color: var(--color-brown);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+}
+button.addedToCartLine{
+  border: 1.4px solid var(--color-brown);
+  background-color: transparent;
+  color: var(--color-brown);
+}
+
+.options{ display: flex; margin-top: 30px;}
+.options .option{ display: flex; align-items: center; margin-right: 30px; font-size: 13px; cursor: pointer;}
+.options .option div{ margin-right: 5px; font-size: 20px; margin-top: -4px;}
+
+/* bookdetails - spec */
+.bookSpec{ width: 30%; min-height: 50vh; position: relative; }
+.specheading{
+  height: 30px;
+  padding: 0 20px;
+  position: absolute;
+  top: 0;
+  left: 5%;
+  background-color: var(--color-brown);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+}
+.bookSpecCont{
+  width: 95%;
+  margin-left: auto;
+  min-height: 50vh;
+  background-color: #FFF6F6;
+  padding: 70px 40px 40px 40px;
+}
+.bookSpecInfo{ display: flex; align-items: flex-start; }
+.bookSpecInfo:not(:last-child){ margin-bottom: 10px; }
+.bookSpecInfo .bookSpecInfoName{ width: 40%; color: #878787; font-size: 14px; }
+.bookSpecInfo .bookSpecInfoValue{ width: 60%; font-size: 15px; }
+.bookSpecInfo .bookSpecInfoValue a{ text-decoration: none; color: var(--color-brown); transition: 0.4s; }
+.bookSpecInfo .bookSpecInfoValue a:hover{ color: var(--color-brown-light); text-decoration: none; }
+
+
+/* ///////////////////////////////////////////////////////////////////////////////////////////////// */
+/* ======================================== REVIEW SECTION ======================================= */
+.reviews{
+  width: 100%;
+  min-height: 90vh;
+  margin-top: 50px;
+  padding: 50px 0;
+  position: relative;
+}
+.reHeading{
+  width: fit-content;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+}
+.reHeading h1{
+  font-size: 2rem;
+  color: var(--color-brown);
+  display: inline-block;
+  position: relative;
+  margin-bottom: 20px;
+}
+.reHeading h1::after, .reHeading h1::before{
+  content: "";
+  position: absolute;
+}
+.reHeading h1::before{
+  bottom: -15px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: var(--color-brown);
+}
+.reHeading h1::after{
+  width: 15px;
+  height: 15px;
+  background-color: var(--color-brown);
+  bottom: -19px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  border: 5px solid #fff;
+}
+.reHeading p{
+  color: #636C77;
+  font-size: 15px;
+}
+.bookReviews{
+  margin-top: 140px;
+  display: flex;
+}
+
+/* ratings */
+.averageRatting{
+  width: 15%;
+  padding-left: 50px;
+}
+.averageRatting h3{
+  font-size: 16px;
+  line-height: 16px;
+  color: #222222;
+  margin-bottom: 40px;
+}
+.averageRatting h4{
+  font-size: 15px;
+  line-height: 15px;
+  color: #222222;
+  margin-bottom: 0px;
+  font-weight: normal;
+}
+.averageRatting h1{
+  font-size: 42px;
+  color: var(--color-brown);
+}
+.averageRatting .stars{
+  height: fit-content;
+  display: flex;
+  margin-top: -10px;
+}
+.coloredStar{
+  color: #FDBC00;
+}
+.plainStar{
+  color: #E6E6E6;
+}
+.averageRatting p{
+  color: #222;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+/* reviews */
+.allreviews{
+  width: 85%;
+  display: flex;
+  flex-wrap: wrap;
+}
+/* empyty page */
+.emptyReview{
+  width: 100%;
+  min-height: 60vh;
+  border: 1px solid #ccc;
+  text-align: center;
+  padding-bottom: 40px;
+}
+.emptyReview img{
+  height: 50vh;
+  margin-top: 5vh;
+}
+.emptyReview button{
+  background-color: var(--color-brown);
+  color: #fff;
+  outline: none;
+  border: none;
+  padding: 10px 40px;
+}
+/* review card */
+.areview, .addReviewOptionCard{
+  width: 30%;
+  height: 250px;
+  margin-bottom: 30px;
+  margin-right: 30px;
+  padding: 20px;
+  border: 1px solid #DDDDDD;
+  overflow: hidden;
+}
+/* add review button cards component */
+.addReviewOptionCard{ position: relative; }
+.addReviewOptionCard h3{ color: var(--color-brown); font-size: 25px; }
+.addReviewOptionCard p{ font-size: 15px; }
+.addReviewOptionCard button{
+  border: none;
+  outline: none;
+  background-color: var(--color-brown);
+  color: #fff;
+  padding: 10px 30px;
+  font-size: 15px;
+}
+.addReviewOptionCard img{
+  position: absolute;
+  bottom: 20px; right: 20px;
+  width: 120px;
+}
+
+/* review card components */
+.client{
+  height: 40px;
+  width: fit-content;
+  background-color: #f2f2f2;
+  border-radius: 40px;
+  display: flex;
+  align-items: center;
+}
+.client__image{
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  background-color: var(--color-brown);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.client__name{
+  padding: 0 15px 0 10px;
+  font-size: 13px;
+  font-weight: 600;
+}
+.clientstars{
+  height: fit-content;
+  margin-top: 6px;
+  display: flex;
+  font-size: 13px;
+}
+.areview h3{ margin-top: 12px; font-size: 16px; color: #222; }
+.areview p{ font-size: 14px; color: #222; }
+.areview p.readmore{ 
+  color: var(--color-brown-light);
+  transition: 0.4s;
+  cursor: pointer;
+  font-weight: 400;
+  margin-top: -5px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+}
+.areview p.readmore:hover{color: var(--color-brown);}
+.vote{
+  margin-top: -10px;
+  padding-left: 0;
+  display: flex;
+}
+.vote div{
+  margin-right: 30px;
+  cursor: pointer;
+}
+
+/* //////////////////////////////////////////////////////////////////////// */
+.reviewFormBlockHide{ display: none; }
+.reviewFormBlockShow{ display: block; }
+.reviewFormBlock{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0,0,0,0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 4000;
+}
+.reviewForm{
+  width: 35%;
+  height: 85vh;
+  background: #fff;
+  padding: 40px 30px;
+  position: relative;
+}
+.reviewForm h3{
+  text-align: center;
+  color: var(--color-brown);
+}
+.reviewForm .icon{
+  position: absolute;
+  top: 40px;
+  right: 30px;
+  cursor: pointer;
+  font-size: 20px;
+  transition: 0.4s;
+}
+.reviewForm .icon:hover{
+  transform: scale(1.2);
+}
+.reviewForm form{
+  margin-top: 40px;
+}
+.reviewForm form .inputContainer{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+}
+label{
+  font-size: 13px;
+  letter-spacing: 1px;
+  color: gray;
+}
+.inputContainer input,
+.inputContainer textarea{
+  border: 1px solid #ccc;
+  font-size: 15px;
+  padding: 10px 20px;
+  outline: none;
+}
+.rattingContainer{
+  text-align: center;
+}
+.reviewForm .submit{
+  width: 100%;
+  padding: 10px 20px;
+  text-align: center;
+  color: #fff;
+  background: var(--color-brown);
+  outline: none;
+  border: none;
+  margin-top: 30px;
+  font-size: 17px;
+}
+
+/* ///////////////////////////////////////////////////////////////////////////// */
+/* ============================= REVIEW DETAIL MODAL ========================= */
+.reviewDetailModalContiner{
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 4000;
+}
+.reviewDetailModal{
+  width: 35%;
+  height: 70vh;
+  background-color: #fff;
+  padding: 40px;
+  position: relative;
+}
+.reviewDetailModal h3{
+  color: var(--color-brown);
+  margin-bottom: 10px;
+}
+.reviewDetailModal h4{
+  font-size: 18px;
+  margin-top: 20px !important;
+}
+/* info container */
+.nameandresponses{
+  width: 100%;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.reviewDescBlock{
+  height: 45vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.reviewDescBlock::-webkit-scrollbar { display: none; }
+.reviewDetailModal p.reviewDesc{
+  font-size: 15px;
+  white-space: pre-wrap;
+}
+.icon{
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  cursor: pointer;
+}
+.icon:hover{
+  transform: scale(1.2);
+}
+
+@media screen and (max-width: 1376px) {
+  .CardBook { min-height: 360px !important; margin-top: 40px; }
+  .book, .bookLoading { height: 170px !important; width: 110px !important; top: 20px; }
+  .bookLoading{ width: 110px !important; }
+  .cartBody { position: absolute; top: 195px; padding: 20px 1.8rem; }
+  .cartBody h4 { font-size: 13px; line-height: 13px; }
+  .cartBody a p{ font-size: 17px; line-height: 17px; }
+  .cartBody p { font-size: 13px; line-height: 13px; }
+  .buttonContainer { margin-top: 30px !important; }
+  .buttonContainer .addToCarBtn { width: 75%; font-size: 12.7px; padding: 8px 10px; }
+
+  .bookDetailContainer { padding: 50px 66px; min-height: 80vh; }
+  .bookImage { align-items: flex-start; }
+  .bookImage img{ width: 247px; height: 365px; }
+  .incrementalButton div{ width: 46px; height: 46px; }
+  .btncont button{ height: 56px; padding: 0 50px; font-size: 15px; }
+  .bookSpecCont{ padding: 60px 30px 30px 30px; }
+  .bookSpecInfo{ display: flex; align-items: flex-start; }
+  .bookSpecInfo:not(:last-child){ margin-bottom: 10px; }
+  .bookSpecInfo .bookSpecInfoName{ width: 40%; color: #878787; font-size: 14px; }
+  .bookSpecInfo .bookSpecInfoValue{ width: 60%; font-size: 15px; }
+}
+
+
+@media screen and (max-width: 480px) {
+  .CardBook{ min-height: 250px !important; margin-top: 0px; margin-left: 20px;}
+  .book, .bookLoading { height: 130px !important; width: 85px !important; position: absolute; top: 15px; }
+  .bookLoading{ width: 80px !important; }
+  .CardBook:hover .cartBody { top: 120px; box-shadow: none; }
+  .cartBody { top: 140px; padding: 10px; }
+  .cartBody h4 { font-size: 10px; line-height: 10px; margin-bottom: 8px; }
+  .cartBody a:hover{ text-decoration: none; color: #555; }
+  .cartBody p.author { font-size: 10px; line-height: 10px; margin-top: -10px; }
+  .cartBody a p{ font-size: 14px; line-height: 13px !important; }
+  .tk { margin-top: -15px; font-size: 20px !important; }
+  .tk span { font-size: 10px; }
+  .tk strike { font-size: 13px; }
+
+  /* BOOK DETAILS PAGE */
+  .topText { padding: 40px 25px 10px 25px; font-size: 14px !important; }
+  .bookDetailContainer { padding: 25px 10px; min-height: 100vh; }
+  .bookImage { width: 100%; min-height: 25vh; }
+  .bookImage img{ width: 140px; height: 200px; }
+  .bookInfo{ width: 100%; min-height: 60vh; }
+  .title{ font-size: 1.2rem; text-align: center;}
+  .author{ font-size: 13px; text-align: center;}
+  .priceContainer{ 
+    margin-bottom: 12px; margin-top: -10px; justify-content: center; 
+    border-top: 1px solid #ccc; border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+  }
+  .priceContainer h1{ font-size: 25px; line-height: 25px; }
+  .priceContainer h1 span{ font-size: 13px; line-height: 13px;}
+  .priceContainer h5{ font-size: 15px; margin-left: 30px; }
+  .priceContainer h4{ font-size: 13px; margin-left: 10px; }
+  .bookInfo p { font-size: 14px; }
+  .incrementalButton{ display: flex; margin-right: 15px;}
+  .incrementalButton div{  width: 40px; height: 40px; }
+  .incrementalButton div:nth-child(2){ cursor: default; }
+  .btncont button{ height: 40px; padding: 0 45px; font-size: 14px; font-weight: 400; }
+  button.addedToCartLine{ border: 1px solid var(--color-brown); padding: 0 30px; }
+  .options{ display: flex; margin-top: 30px;}
+  .bookSpec{ width: calc(100% - 20px); margin-top: -40px;}
+  .specheading{ 
+    height: 50px; background-color: transparent; color: var(--color-brown);
+    font-size: 17px; font-weight: 500; padding: 0; border-bottom: 2px solid var(--color-brown);
+  }
+  .bookSpecCont{ width: 100%; min-height: 50vh; background-color: transparent; padding: 70px 20px 20px 20px; }
+  .bookSpecInfo .bookSpecInfoName{ width: 45%; color: #878787; font-size: 13px; }
+  .bookSpecInfo .bookSpecInfoValue{ width: 55%; font-size: 13px; }
+
+  /* REVIEW SECTION */
+  .reviews{ margin-top: 0px; padding: 20px 0; }
+  .reHeading h1{ font-size: 1.3rem; margin-bottom: 15px; }
+  .reHeading h1::before{ bottom: -7px; height: 2px; }
+  .reHeading h1::after{ bottom: -13px; }
+  .reHeading p{ font-size: 14px; }
+  .bookReviews{ margin-top: 80px; flex-wrap: wrap; }
+  .averageRatting{ width: 100%; padding-left: 20px; }
+  .averageRatting h3{ display: none; }
+  .averageRatting h4{ display: none; }
+  .averageRatting h1{ font-size: 32px; text-align: center; }
+  .averageRatting .stars{ justify-content: center; }
+  .averageRatting p{ font-size: 13px; text-align: center; }
+
+  .allreviews{ width: 100%; }
+  .emptyReview{ width: 95%; margin: auto; padding-bottom: 0; padding: 25px; }
+  .emptyReview img{ height: 35vh; }
+  .emptyReview h3 { font-size: 16px; }
+  .emptyReview p { font-size: 13px; }
+  .emptyReview button{ padding: 8px 20px; font-size: 14px;}
+  
+  .areview, .addReviewOptionCard{ width: 100%; height: 180px; margin: 10px 20px; padding: 15px; }
+  .addReviewOptionCard h3{ font-size: 17px; }
+  .addReviewOptionCard p{ font-size: 13px; }
+  .addReviewOptionCard button{ padding: 8px 20px; font-size: 13px; }
+  .addReviewOptionCard img{ bottom: 10px; right: 10px; width: 100px; }
+  .client{ height: 30px; border-radius: 30px; font-size: 13px; }
+  .client__image{ height: 30px; width: 30px; font-size: 10px;}
+  .clientstars{ font-size: 10px; }
+  .areview h3{ margin-top: 8px; font-size: 14.5px;}
+  .areview p{ font-size: 12.5px;}
+  .areview p.readmore{ margin-top: -7px; }
+  .vote{ margin-top: -13px; }
+  .reviewForm{ width: 95%; height: 95vh; padding: 40px 20px; }
+  .reviewForm h3{ font-size: 20px; }
+  .reviewForm .icon{ top: 20px; right: 20px; font-size: 25px; }
+  .reviewForm form{ margin-top: 28px; }
+  .reviewForm form .inputContainer{ margin-bottom: 20px; }
+  .reviewForm form label{ font-size: 11px; }
+  .inputContainer input,
+  .inputContainer textarea{ font-size: 13px; padding: 8px 20px;}
+  .reviewForm .submit{ width: 100%; padding: 8px 20px; margin-top: 20px; font-size: 14px; }
+
+  .reviewDetailModal{ width: 95%; height: 95vh; padding: 40px 25px; }
+  .reviewDetailModal h3{ margin-bottom: 10px; font-size: 20px; }
+  .reviewDetailModal h4{ font-size: 15.5px; }
+  .nameandresponses div{ font-size: 13px; }
+  .reviewDescBlock{ height: 65vh; }
+  .reviewDetailModal p.reviewDesc{ font-size: 13.5px; }
+  .icon{ right: 20px; }
+}

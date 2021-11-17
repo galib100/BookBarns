@@ -1,17 +1,76 @@
-import React from "react";
-import { Carousel_sidebar } from "../../../Components/Viewer/Carousel/Carousel_sidebar";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { connect } from "react-redux";
+import { Helmet } from "react-helmet";
+import { BASE_URL } from "../../../Constants/URL";
+import { saveBooksCategories } from "../../../Actions/Viewer/BookRelated";
+// COMPONENTS
 import { Nav1 } from "../../../Components/Viewer/Navbar/";
-import { Items } from "../../../Components/Viewer/Items";
 import { Footer } from "../../../Components/Viewer/Footer";
-const LandingPage = () => {
+import Items from "../../../Components/Viewer/Landing/Items";
+import BannerForLandingPage from "../../../Components/Viewer/Landing/BannerForLandingPage";
+
+const LandingPage = ({ categoriesOfBooks, saveBooksCategories }) => {
+  const [categeroyLoading, setCategoryLoading] = useState(false);
+
+  // FETCH CATEGORIES
+  const fetchCategories = () => {
+    setCategoryLoading(true);
+    axios
+      .get(`${BASE_URL}/api/admin/allCategory`)
+      .then((res) => {
+        setCategoryLoading(false);
+        saveBooksCategories(res.data);
+      })
+      .catch((err) => {
+        setCategoryLoading(false);
+      });
+  };
+
+  // CONTROL CATEGORIES
+  useEffect(() => {
+    if (categoriesOfBooks.length === 0) {
+      fetchCategories();
+    }
+  }, [categoriesOfBooks]);
+
   return (
-    <div>
+    <>
+      <Helmet>
+        <title>Obosor</title>
+        <meta name="title" content="Obosor " />
+        <meta
+          name="description"
+          content="Obosor is a community-based book shop founded by a group of enthusiasts from RUET, which won the Bangabandhu Innovation Grant 2019."
+        />
+        <meta
+          name="keywords"
+          content="obosor, book shop, Bangabandhu Innovation Grant, obosor ruet, obosor shop, online book shop, book market, obosor books, best books online "
+        />
+        <meta name="robots" content="index, follow" />
+      </Helmet>
+
       <Nav1 />
-      <Carousel_sidebar />
+      <BannerForLandingPage
+        categeroyLoading={categeroyLoading}
+        saveBooksCategories={saveBooksCategories}
+      />
       <Items />
       <Footer />
-    </div>
+    </>
   );
 };
 
-export default LandingPage;
+const mapStateToProps = (state) => {
+  return {
+    categoriesOfBooks: state.bookController.categoriesOfBooks,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    saveBooksCategories: (books) => dispatch(saveBooksCategories(books)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(LandingPage);

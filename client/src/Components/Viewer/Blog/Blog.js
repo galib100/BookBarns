@@ -1,77 +1,179 @@
-import React,{useState,useEffect} from 'react'
-import { Nav1 } from '../Navbar/'
-import { Footer } from '../Footer'
-import { Col, Row,Pagination, Card, Container, Button } from "react-bootstrap";
-import Style from '../AboutUs/About.module.css'
-import BlogDemo from './BlogDemo'
-// import {FaPhone}  from  'react-icons/FaPhone'
-const Blog = () => {
-    // const [posts,setPosts]= useState(['']);
-    // const [currentPage,setCurrentPage] = useState([1]);
-    // const [postPerPage,setPostPerPage] =useState([4]);
-     
-    return (
-        <div> 
-         <Nav1 />
-         <div className={Style.topText}>
-        <h5> Home <i className='fa fa-greater-than fa-sm mt-4'>  </i> Category <i className='fa fa-greater-than fa-sm'></i> Sub-Category  or books</h5>
-            
-         </div>
-          <hr/>
-         <Container >{
-             BlogDemo.map((val)=>{
-                 return (
-             
-            <Row>
-                <Col xs={8}>
-                    <Card className='my-2'>
-                        <Card.Body>
-                            <Card.Img src={val.img}>
-                            </Card.Img>
-                            <Row>
-                                <Col xs={2}>
-                                    <Card> 
-                                        <Card.Body>
-                                            <Card.Title>
-                                                {val.date.slice(0,2)}
-                                            </Card.Title>
-                                            <button className={Style.p_btn_sm}>{val.date.slice(3)}</button>
-                                        </Card.Body>
-                                    </Card>
-                                </Col>
-                                <Col xs={10}>
-                                    <Card.Title className={Style.blogTitle}>
-                                       {val.title}
-                                    </Card.Title>
-                                    <Card.Text className={Style.ContentTxt}>
-                                    {val.content}
-                                    </Card.Text>
-                                    <span> <i className='fas fa-calendar-alt p-2'></i> {val.date}</span>
-                                    <span> <i className='fas fa-user p-2'></i> By UserName</span>
-                                </Col>
-                            </Row>
-                        </Card.Body>
-                    </Card>
-                </Col>
-                <Col xs={4}>
-                    <Card className={`my-2  ${Style.dicountBody}`}>
-                        <Card.Body>
-                        <Card.Img src="./images/bookA.png" alt="" />
-                        <Card.Title>
-                        Get Upto
-                        </Card.Title>
-                        <h4 className={Style.dicountTxt}>35% Discount </h4>
-                        <span className='text-muted'>DONOT MISS THE CHANCE</span>
-                        </Card.Body>
-                    </Card>
-                </Col>
-            </Row>)
-            })
-        }
-        </Container>
-        <Footer />
-        </div>
-    )
-}
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
-export default Blog
+// Components & Styles
+import { Nav1 } from "../Navbar/";
+import { Footer } from "../Footer";
+import Style from "./Blog.module.css";
+import ABlog from "./ABlog";
+import { getAdsFrontend } from "../../../Actions/Admin/AdActions";
+import { connect } from "react-redux";
+import Ad from "./Ad";
+import useQuery from "../../../Utils/useQuery";
+import { getBlogs } from "../../../Actions/Admin/BlogActions";
+
+const Blog = ({ getAdsFrontend, data, getBlogs, blogs }) => {
+  //const [blogs, setblogs] = useState([]);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    // const getBlogItems = async () => {
+    //   await axios
+    //     .get(`${BASE_URL}/api/admin/blog`)
+    //     .then((res) => {
+    //       setblogs(res.data);
+    //     })
+    //     .catch((err) => {
+    //       console.log(err.message);
+    //     });
+    // };
+    // getBlogItems();
+    getBlogs();
+    getAdsFrontend();
+  }, []);
+
+  let query = useQuery();
+
+  const pagination = () => {
+    let count = blogs.length;
+    let elementPagination = [];
+    console.log(query.get("page"));
+
+    for (let i = 0; i < count / 5; i++) {
+      if (!query.get("page") && i === 0) {
+        elementPagination.push(
+          <li key={i} class="page-item active">
+            <Link class="page-link active" to={`/blog?page=${i + 1}`}>
+              {i + 1}
+            </Link>
+          </li>
+        );
+      } else if (parseInt(query.get("page")) === i + 1) {
+        elementPagination.push(
+          <li key={i} class="page-item active">
+            <Link class="page-link" to={`/blog?page=${i + 1}`}>
+              {i + 1}
+            </Link>
+          </li>
+        );
+      } else {
+        elementPagination.push(
+          <li key={i} class="page-item">
+            <Link class="page-link" to={`/blog?page=${i + 1}`}>
+              {i + 1}
+            </Link>
+          </li>
+        );
+      }
+    }
+    return elementPagination;
+  };
+
+  const blogList = () => {
+    if (blogs.length === 0) {
+      return;
+    }
+    let element = [];
+    let lowerLimit =
+      query.get("page") === null ? 0 : parseInt(query.get("page")) * 5 - 5;
+    for (let i = lowerLimit; i < lowerLimit + 5 && i < blogs.length; i++) {
+      element.push(
+        <ABlog
+          key={blogs[i]._id}
+          id={blogs[i]._id}
+          banner={blogs[i].image}
+          title={blogs[i].title}
+          content={blogs[i].short_description}
+          date={blogs[i].date}
+        />
+      );
+    }
+
+    return element;
+  };
+
+  return (
+    <div>
+      {/* ==================== Navigation =================== */}
+      <Nav1 />
+
+      {/* ==================== Top Text =================== */}
+      <div className={Style.topText}>
+        <Link to="/">Home</Link>
+        <div>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="feather feather-chevron-right"
+          >
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </div>
+        <Link to="/blog">Blog</Link>
+      </div>
+
+      <div className={`${Style.contentContainer}`}>
+        {/* ==================== BLOG POSTS =================== */}
+        <div className={`${Style.blogContainer}`}>
+          {blogs !== [] && blogList()}
+
+          {/* {   blogs.map((blog) => (
+            <ABlog
+              key={blog._id}
+              id={blog._id}
+              banner={blog.image}
+              title={blog.title}
+              content={blog.short_description}
+              date={blog.date}
+            />
+          ))} */}
+        </div>
+
+        {/* ==================== ADDS =================== */}
+        <div className={`${Style.addContainer}`}>
+          {/* add - 1 */}
+          {/* AD IMPLEMANTATION HERE */}
+          {data.map((item) => (
+            <Ad key={item._id} {...item} />
+          ))}
+        </div>
+      </div>
+
+      {/* ==================== Pagination =================== */}
+      <div className={`${Style.pagination}`}>
+        <nav aria-label="Page navigation example">
+          <ul class="pagination">
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+              </a>
+            </li>
+            {pagination()}
+
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Next</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <Footer />
+    </div>
+  );
+};
+
+const mapStateToProps = (state) => ({
+  data: state.auth_ad.ads,
+  blogs: state.admin_blog_page.blogs,
+});
+
+export default connect(mapStateToProps, { getAdsFrontend, getBlogs })(Blog);

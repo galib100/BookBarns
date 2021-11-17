@@ -2,11 +2,21 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { Modal } from "react-bootstrap";
 import swal from "sweetalert";
-import { preOrderModalToggleAction } from "../../../Actions/Admin/PreOrderActions";
+import {
+  preOrderAdd,
+  preOrderEdit,
+  preOrderModalToggleAction,
+} from "../../../Actions/Admin/PreOrderActions";
 import styles from "./PreOrderModal.module.css";
-import data from "../data/bestSellerBook";
 
-const PreOrderModal = ({ preOrderModalToggleAction, open, book }) => {
+const PreOrderModal = ({
+  preOrderModalToggleAction,
+  preOrderAdd,
+  open,
+  book,
+  data,
+  preOrderEdit,
+}) => {
   const [selectedBook, setSelectedBook] = useState(book ? book : {});
   const [search, setSearch] = useState("");
   const [list, setList] = useState([]);
@@ -21,12 +31,20 @@ const PreOrderModal = ({ preOrderModalToggleAction, open, book }) => {
     e.preventDefault();
     if (book) {
       //Edit BOOK SUBMIT ACTION CALL
+      preOrderEdit(book._id, selectedBook._id);
       swal("Book Modified!", "", "success");
+      handleClose();
     } else {
-      //ADD BOOK SUBMIT ACTION CALL
-      swal("Book Added!", "", "success");
+      if (selectedBook._id) {
+        //ADD BOOK SUBMIT ACTION CALL
+        preOrderAdd(selectedBook._id);
+        //console.log(selectedBook);
+        swal("Book Added!", "", "success");
+        handleClose();
+      } else {
+        swal("Please select a book", "", "info");
+      }
     }
-    preOrderModalToggleAction();
   };
 
   const onChangeHandeler = (text) => {
@@ -43,13 +61,15 @@ const PreOrderModal = ({ preOrderModalToggleAction, open, book }) => {
   };
 
   const selectItem = (id) => {
-    setSelectedBook(...data.filter((item) => item.id === id));
+    setSelectedBook(...data.filter((item) => item._id === id));
     setList([]);
+    setSearch(data.filter((item) => item._id === id)[0].title);
   };
 
   const handleClose = () => {
     preOrderModalToggleAction();
     setSelectedBook({});
+    setSearch("");
   };
 
   return (
@@ -69,8 +89,8 @@ const PreOrderModal = ({ preOrderModalToggleAction, open, book }) => {
           />
           <div className="list-group">
             {list.map((item) => (
-              <div key={item.id} className={`${styles.item} list-group-item`}>
-                <span onClick={() => selectItem(item.id)}>{item.title}</span>
+              <div key={item._id} className={`${styles.item} list-group-item`}>
+                <span onClick={() => selectItem(item._id)}>{item.title}</span>
               </div>
             ))}
           </div>
@@ -95,7 +115,7 @@ const PreOrderModal = ({ preOrderModalToggleAction, open, book }) => {
             <span className="d-block">Uploaded To</span>
             <div className={`${styles.item__wrapper} mt-2`}>
               <div className={styles.key}>Category</div>
-              <div className={styles.value}>Pre Order</div>
+              <div className={styles.value}>On Pre-Order</div>
             </div>
           </div>
 
@@ -109,10 +129,13 @@ const PreOrderModal = ({ preOrderModalToggleAction, open, book }) => {
 };
 
 const mapStateToProps = (state) => ({
-  open: state.admin_page.pre_order_modal,
-  book: state.admin_page.pre_order_book,
+  open: state.admin_book_page.pre_order_modal,
+  book: state.admin_book_page.pre_order_book,
+  data: state.admin_book_page.books,
 });
 
-export default connect(mapStateToProps, { preOrderModalToggleAction })(
-  PreOrderModal
-);
+export default connect(mapStateToProps, {
+  preOrderModalToggleAction,
+  preOrderAdd,
+  preOrderEdit,
+})(PreOrderModal);

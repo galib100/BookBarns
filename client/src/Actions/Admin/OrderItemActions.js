@@ -1,16 +1,45 @@
-import { GET_ORDER_ITEM } from "../../Constants/Types";
-import data from "../../Components/Admin/data/orders";
+import {
+  GET_ORDER_ITEM,
+  ORDER_ERROR,
+  UPDATE_ORDER_STATUS,
+} from "../../Constants/Types";
+import axios from "axios";
+import { BASE_URL } from "../../Constants/URL";
 
 export const getOrderItem = (orderId) => (dispatch) => {
-  let selectedOrder = data.filter((item) => item.id === orderId)[0];
-  //console.log(selectedOrder);
-  if (selectedOrder) {
+  //console.log(orderId)
+  dispatch({
+    type: GET_ORDER_ITEM,
+    payload: orderId,
+  });
+};
+
+//EDIT STATUS
+export const editOrderStatus = (status, orderId) => async (dispatch) => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  const body = JSON.stringify({ status: status });
+  try {
+    const res = await axios.patch(
+      `${BASE_URL}/api/order/${orderId}`,
+      body,
+      config
+    );
+
     dispatch({
-      type: GET_ORDER_ITEM,
-      payload: selectedOrder,
+      type: UPDATE_ORDER_STATUS,
+      payload: res.data[0],
     });
+    console.log(res.data[0]);
     return true;
-  } else {
+  } catch (err) {
+    dispatch({
+      type: ORDER_ERROR,
+    });
+    //console.log(err);
     return false;
   }
 };

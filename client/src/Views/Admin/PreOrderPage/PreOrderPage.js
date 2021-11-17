@@ -18,7 +18,7 @@ const PreOrderPage = () => {
           </Col>
           <Col md={9} className="pb-5 pr-md-5 pr-0">
             <PageHeader
-              title="Pre-Order List"
+              title="On Pre-Order"
               modal="preOrder"
               btnText="Add New Book In This List"
               backLink="/admin/dashboard"

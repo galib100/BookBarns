@@ -1,0 +1,15 @@
+.heading {
+  color: var(--color-brown) !important;
+  text-align: center !important;
+}
+
+.subcat_plus {
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.subcat_plus:hover {
+  color: var(--color-primary);
+}

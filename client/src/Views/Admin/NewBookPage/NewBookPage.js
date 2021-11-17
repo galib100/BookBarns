@@ -8,7 +8,7 @@ import { getBook } from "../../../Actions/Admin/BooksActions";
 import { connect } from "react-redux";
 
 const NewBookPage = ({ match, getBook, loading }) => {
-  const [headline, setHeadline] = useState("Upload New Books");
+  const [headline, setHeadline] = useState("Upload New Product");
   let bookId = match.params.id ? match.params.id : -1;
 
   useEffect(() => {
@@ -17,9 +17,11 @@ const NewBookPage = ({ match, getBook, loading }) => {
       path = path.split("/");
       if (
         path[path.length - 3] === "admin" &&
-        path[path.length - 2] === "edit"
+        path[path.length - 2] === "book"
       ) {
-        setHeadline("Edit Admin");
+        setHeadline("Edit Book");
+      } else {
+        getBook(0);
       }
       if (bookId !== -1) {
         getBook(bookId);
@@ -27,7 +29,7 @@ const NewBookPage = ({ match, getBook, loading }) => {
     };
 
     title();
-  }, []);
+  }, [match.params.id]);
   return (
     <div className="bg-light">
       <NavbarAdmin />

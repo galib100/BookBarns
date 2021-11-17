@@ -9,6 +9,32 @@
   justify-content: center;
   align-items: center;
 }
+.date__wrapper {
+  background: var(--color-primary-light);
+  padding: 5px 10px;
+  color: var(--color-secondary);
+  margin-right: 15px;
+  height: 32px;
+  width: 50%;
+  font-size: 12px !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.new__book {
+  height: 40px !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  text-decoration: none;
+}
+
+.new__book:hover {
+  text-decoration: none;
+  color: var(--color-white);
+}
 
 .search {
   outline: none;
@@ -125,6 +151,7 @@
   transition: 0.3s all ease-in-out;
 }
 
+.pending:hover,
 .confirm:hover,
 .processing:hover,
 .processing:hover,

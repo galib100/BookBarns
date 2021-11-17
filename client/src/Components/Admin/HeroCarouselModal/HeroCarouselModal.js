@@ -4,10 +4,21 @@ import { Modal, Form as BootstrapForm, InputGroup } from "react-bootstrap";
 import swal from "sweetalert";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import { heroCarouselModalToggleAction } from "../../../Actions/Admin/HeroCarouselActions";
+import {
+  addHeroCarousel,
+  editHeroCarousel,
+  heroCarouselModalToggleAction,
+} from "../../../Actions/Admin/HeroCarouselActions";
 import styles from "./HeroCarouselModal.module.css";
+import { BASE_URL } from "../../../Constants/URL";
 
-const HeroCarouselModal = ({ heroCarouselModalToggleAction, open, book }) => {
+const HeroCarouselModal = ({
+  heroCarouselModalToggleAction,
+  open,
+  book,
+  addHeroCarousel,
+  editHeroCarousel,
+}) => {
   const [selectedFile, setSelectedFile] = useState();
   const [preview, setPreview] = useState();
 
@@ -23,6 +34,8 @@ const HeroCarouselModal = ({ heroCarouselModalToggleAction, open, book }) => {
   }, [selectedFile]);
 
   const handleClose = () => {
+    setSelectedFile(undefined);
+    setPreview(undefined);
     heroCarouselModalToggleAction();
   };
 
@@ -41,18 +54,30 @@ const HeroCarouselModal = ({ heroCarouselModalToggleAction, open, book }) => {
   };
 
   const onSubmitHandeler = (values) => {
-    if (book) {
-      //Carousel Add SUBMIT ACTION CALL
-      swal("Success!", "Carousel Item Modified", "success");
+    if (book._id) {
+      //Carousel EDIT ACTION CALL
+      let flag = editHeroCarousel(values, selectedFile, book._id);
+      if (flag) {
+        swal("Success!", "Carousel Item Modified", "success");
+        resetlHandeler();
+      } else {
+        swal("Error!", "Something went wrong", "error");
+      }
     } else {
       //Carousel Add SUBMIT ACTION CALL
-      swal("Success!", "Carousel Item Added", "success");
+      if (selectedFile) {
+        addHeroCarousel(values, selectedFile);
+        swal("Success!", "Carousel Item Added", "success");
+
+        resetlHandeler();
+      } else {
+        swal("Error!", "Select an Image", "warning");
+      }
     }
 
-    console.log(values);
-    heroCarouselModalToggleAction();
+    //console.log(values);
   };
-  let initCaption = book.caption || "";
+  let initCaption = book.link || "";
 
   const initVals = {
     caption: initCaption,
@@ -60,8 +85,8 @@ const HeroCarouselModal = ({ heroCarouselModalToggleAction, open, book }) => {
   };
 
   const SignupSchema = Yup.object().shape({
-    caption: Yup.string().required("Caption is required!"),
-    image: Yup.mixed().nullable().required("Image is required!"),
+    caption: Yup.string().url("Enter valid URL").nullable().notRequired(),
+    image: Yup.mixed().nullable().notRequired("Image is required!"),
   });
 
   return (
@@ -71,6 +96,7 @@ const HeroCarouselModal = ({ heroCarouselModalToggleAction, open, book }) => {
       </Modal.Header>
       <Modal.Body>
         <Formik
+          enableReinitialize
           initialValues={initVals}
           validationSchema={SignupSchema}
           onSubmit={(values) => onSubmitHandeler(values)}
@@ -84,7 +110,7 @@ const HeroCarouselModal = ({ heroCarouselModalToggleAction, open, book }) => {
               <InputGroup className="mb-3 d-flex flex-column">
                 <div className="d-flex justify-content-between align-items-center">
                   <label htmlFor="caption" className="d-block">
-                    Caption
+                    Link
                   </label>
                   {errors.caption && touched.caption ? (
                     <small className="text-danger">{errors.caption}</small>
@@ -92,7 +118,7 @@ const HeroCarouselModal = ({ heroCarouselModalToggleAction, open, book }) => {
                 </div>
                 <Field
                   as={BootstrapForm.Control}
-                  placeholder="Caption for the Carousel Item"
+                  placeholder="Link for the Carousel Item"
                   name="caption"
                   isValid={!errors.caption && touched.caption}
                   type="text"
@@ -113,7 +139,6 @@ const HeroCarouselModal = ({ heroCarouselModalToggleAction, open, book }) => {
                       style={{ minWidth: "400px" }}
                       isValid={!errors.image && touched.image}
                       isInvalid={errors.image && touched.image}
-                      required
                     />
 
                     <BootstrapForm.File.Label data-browse="Browse">
@@ -135,7 +160,7 @@ const HeroCarouselModal = ({ heroCarouselModalToggleAction, open, book }) => {
                     )}
                     {!selectedFile && book.image && (
                       <img
-                        src={book.image}
+                        src={`${BASE_URL}/${book.image}`}
                         style={{ maxWidth: "400px", maxHeight: "300px" }}
                       />
                     )}
@@ -167,10 +192,12 @@ const HeroCarouselModal = ({ heroCarouselModalToggleAction, open, book }) => {
 };
 
 const mapStateToProps = (state) => ({
-  open: state.admin_page.hero_carousel_modal,
-  book: state.admin_page.hero_carousel_item,
+  open: state.auth_hero.hero_carousel_modal,
+  book: state.auth_hero.hero_carousel_item,
 });
 
-export default connect(mapStateToProps, { heroCarouselModalToggleAction })(
-  HeroCarouselModal
-);
+export default connect(mapStateToProps, {
+  heroCarouselModalToggleAction,
+  addHeroCarousel,
+  editHeroCarousel,
+})(HeroCarouselModal);

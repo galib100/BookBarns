@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Formik, Form, Field } from "formik";
 import { Form as BootstrapForm, InputGroup } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
@@ -8,10 +8,17 @@ import styles from "./AddAdminForm.module.css";
 import { ShadowCard } from "../../shared/ShadowCard";
 
 import data from "../data/admin";
+import { addAdmin } from "../../../Actions/Admin/AdminActions";
+import { connect } from "react-redux";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import ReactPasswordToggleIcon from "react-password-toggle-icon";
 
-const AddAdminForm = ({ edit }) => {
+const AddAdminForm = ({ edit, addAdmin, admins }) => {
   const [selectedFile, setSelectedFile] = useState();
   const [preview, setPreview] = useState();
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [isPasswordVisible2, setIsPasswordVisible2] = useState(false);
+
   useEffect(() => {
     if (!selectedFile) {
       setPreview(undefined);
@@ -27,6 +34,10 @@ const AddAdminForm = ({ edit }) => {
       setSelectedFile(undefined);
       return;
     }
+    if (e.target.files[0].size > 2000000) {
+      swal("File size is too big", "", "error");
+      return;
+    }
     setSelectedFile(e.target.files[0]);
   };
 
@@ -37,8 +48,19 @@ const AddAdminForm = ({ edit }) => {
 
   const onSubmitHandeler = (values) => {
     if (edit === -1) {
+      if (!selectedFile) {
+        swal("Please select an image", "", "error");
+        return;
+      }
+      let adminCheck =
+        admins.filter((admin) => admin.username === values.username).length > 0;
+      if (adminCheck) {
+        swal("Admin username already exists", "", "error");
+        return;
+      }
+
       swal("Success!", "Admin Added", "success");
-      console.log(values);
+      addAdmin(values, selectedFile);
     } else {
       swal("Success!", "Admin Modified", "success");
       console.log(values);
@@ -153,10 +175,22 @@ const AddAdminForm = ({ edit }) => {
                 placeholder="Create your own password"
                 name="password"
                 isValid={!errors.password && touched.password}
-                type="password"
+                type={isPasswordVisible ? "text" : "password"}
                 className={`${styles.input} w-100`}
                 isInvalid={errors.password && touched.password}
+                style={{ position: "relative" }}
               />
+              {!isPasswordVisible ? (
+                <AiOutlineEye
+                  className={styles.eyeIcon}
+                  onClick={() => setIsPasswordVisible(!isPasswordVisible)}
+                />
+              ) : (
+                <AiOutlineEyeInvisible
+                  className={styles.eyeIcon}
+                  onClick={() => setIsPasswordVisible(!isPasswordVisible)}
+                />
+              )}
             </InputGroup>
             <InputGroup className="mb-3 d-flex flex-column">
               <div className="d-flex justify-content-between align-items-center">
@@ -172,10 +206,22 @@ const AddAdminForm = ({ edit }) => {
                 placeholder="Re-type to confirm password"
                 name="password2"
                 isValid={!errors.password2 && touched.password2}
-                type="password"
+                type={isPasswordVisible2 ? "text" : "password"}
                 className={`${styles.input} w-100`}
                 isInvalid={errors.password2 && touched.password2}
+                style={{ position: "relative" }}
               />
+              {!isPasswordVisible2 ? (
+                <AiOutlineEye
+                  className={styles.eyeIcon}
+                  onClick={() => setIsPasswordVisible2(!isPasswordVisible2)}
+                />
+              ) : (
+                <AiOutlineEyeInvisible
+                  className={styles.eyeIcon}
+                  onClick={() => setIsPasswordVisible2(!isPasswordVisible2)}
+                />
+              )}
             </InputGroup>
 
             <div className="d-flex flex-md-row flex-column justify-content-between ">
@@ -206,12 +252,14 @@ const AddAdminForm = ({ edit }) => {
                   {selectedFile && (
                     <img
                       src={preview}
+                      alt="admin"
                       style={{ maxWidth: "400px", maxHeight: "300px" }}
                     />
                   )}
                   {selectedAdmin && !selectedFile && (
                     <img
                       src={selectedAdmin.image}
+                      alt="admin"
                       style={{ maxWidth: "400px", maxHeight: "300px" }}
                     />
                   )}
@@ -240,5 +288,8 @@ const AddAdminForm = ({ edit }) => {
     </ShadowCard>
   );
 };
+const mapStateToProps = (state) => ({
+  admins: state.admin_page.admins,
+});
 
-export default AddAdminForm;
+export default connect(mapStateToProps, { addAdmin })(AddAdminForm);

@@ -1,87 +1,565 @@
-.cartPage{
-    background:#F1F2F4;
+.cartPage {
+  background: #f1f2f4;
+  min-height: 100vh;
+  padding: 20px 0 50px 0;
 }
-.CartHead{
-    width:100%;
-    height: 100px;
-    background:#FFFFFF;
-    padding:20px;
+.cartContainer {
+  max-width: 80% !important;
+  margin: auto;
+  padding: 0;
+  margin-top: 30px;
+  margin-bottom: 40px;
 }
-.CartHeadText{
-    font-size:33px;
-    color:#222222;
-    weight:500;
-    
-}
-.totalText{
-font-size:22px;
+.cartContainer .myRow{
+  width: 100%;
+  display: flex !important;
+  justify-content: space-between !important;
+  flex-wrap: wrap;
 
 }
-.savingText{
-    font-size:18px;
-    color:var(--color-brown-light)
+
+/* ////////////////////////////////////////////////////////////////////////////////////////////// */
+/* =============================== BOOK LIST =========================== */
+.CartPart {
+  height: 103vh;
+  padding: 0 !important;
+  width: 59% !important;
+  background: #ffffff;
 }
-.CartPart{
-    width:100%;
-    background: #FFFFFF;
-    margin-bottom:40px;
+.calculation{
+  width: 39% !important;
 }
-.ChekBox{
-    height:25px !important;
-    width:27px !important;
-   padding:70px 0 !important;
-   margin-top: 50px;
+/* Cart Head */
+.CartHead {
+  width: 100%;
+  background: #ffffff;
+  padding: 20px 20px 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #dee2e6;
 }
-.imgcart{
-    width:128px !important;
-    height:141px !important;
+.CartHead .cartHeadLeft,
+.CartHead .cartHeadRight {
+  width: fit-content;
 }
-.amtFiled{
-    height:35px;
-    width:50px;
-    border:1px solid #DEE2E6;
-    
+.CartHead .cartHeadLeft h1 {
+  font-size: 2rem;
 }
-.tkTxt{
-    clear: both;
-    display: inline-block !important;
-    overflow: hidden !important;
+.CartHead .cartHeadLeft h1 span {
+  font-size: 15px;
+  font-weight: normal;
 }
-.muteTxt{
-  text-decoration: line-through;
-  font-size:16px;
-  color:#D3D3D3;
+.CartHead .cartHeadRight h3 {
+  font-size: 18px;
+  line-height: 18px;
+  text-align: right;
 }
-.plusMinus{
-    height:35px !important;
-    width:35px !important;
-    background:#F5F5F5;
-    outline:none !important;
-    border: 1px solid #DEE2E6;
-    box-shadow:none;
-    
+.CartHead .cartHeadRight p {
+  text-align: right;
+  color: var(--color-brown-light);
+  font-size: 13px;
+  margin-bottom: 0;
 }
-.odrBtn{
-    width: 260px;
-    height: 60px;
-    padding:10px;
-    background:var(--color-brown);
-    margin-bottom:104px;
-    float:right !important;
-    color:var(--color-white);
-    font-size:22px;
-    margin-right:20px;
-    weight:400;
-    border:none!important
+.CartHead .cartHeadRight p span {
+  color: #13c37b;
 }
-.shipingAdd{
-    font-size:16px!important;
-    color:#787878;
+
+/* Selected Books */
+.selectedBooks {
+  overflow-x: hidden;
+  overflow-y: scroll;
+  height: 75vh;
 }
-.addTitle{
-    font-size:22px !important;
-    color:#393939!important;
-    padding-top:15px;
-    margin-top:10px;
-    margin-bottom:0px !important;
+.selectedBooks::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+.selectedBooks::-webkit-scrollbar {
+  width: 6px;
+  background-color: transparent;
+}
+.selectedBooks::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #ccc;
+}
+.selectedBook {
+  padding: 20px 30px;
+  border-bottom: 1px solid #dee2e6;
+  display: flex;
+}
+/* Single book - checkbox */
+.checkBoxContainer {
+  max-width: 5% !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Single book - image-box */
+.imageContainer {
+  max-width: 20% !important;
+}
+.imgcart {
+  width: 120px !important;
+  height: 160px !important;
+}
+
+/* Single book - info-box */
+.infoContainer {
+  max-width: 35% !important;
+  position: relative;
+}
+.infoContainer h3 {
+  font-weight: normal;
+  font-size: 20px;
+  text-align: left;
+}
+.infoContainer p {
+  font-size: 14px;
+  text-align: left;
+}
+.infoContainer p.priceForMobile{
+  font-size: 16px;
+  line-height: 16px;
+  display: none;
+  color: var(--color-brown-light);
+  font-weight: 500;
+}
+.infoContainer p.priceForMobile strike{
+  margin-right: 5px;
+}
+.infoContainer i {
+  position: absolute;
+  left: 15px;
+  bottom: 0;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* Single book - increment button */
+.buttonContainer {
+  max-width: 20% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+.incrementButton {
+  display: flex;
+}
+.incrementButton div {
+  width: 40px;
+  height: 40px;
+  background-color: #f5f5f5;
+  border: 1px solid #dee2e6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.incrementButton div:nth-child(2) {
+  background-color: transparent;
+  border-left: none;
+  border-right: none;
+  cursor: default;
+}
+
+/* Single book - price */
+.priceContainer {
+  max-width: 20% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+.priceContainer div {
+  width: 100%;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  padding: 0 10px;
+}
+.priceContainer div .text {
+  font-size: 14px;
+  line-height: 14px;
+  color: #ccc;
+}
+.priceContainer div .textbold {
+  font-size: 17px;
+  line-height: 16px;
+  font-weight: 600;
+}
+.incBtnForMobile{
+  display: none;
+}
+
+/* Order button */
+.odrBtn {
+  padding: 10px 50px;
+  background: var(--color-brown);
+  margin-top: 2rem;
+  float: right !important;
+  color: var(--color-white);
+  font-size: 18px;
+  margin-right: 20px;
+  border: none !important;
+  transition: 0.4s;
+}
+.odrBtn:hover {
+  background: var(--color-brown-light);
+}
+
+/* ////////////////////////////////////////////////////////////////////////////////////////////// */
+/* =============================== CALCULATION =========================== */
+.deliverySelectionForm {
+  margin-bottom: 10px !important;
+  margin-top: 0;
+  position: relative;
+}
+.deliverySelectionForm input{
+  width: 100%;
+  margin-top: 10px;
+  padding: 8px 20px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+}
+.deliverySelectionForm input .districtError{
+  border: 1px solid red;
+}
+.districtResult{
+  width: 100%;
+  position: absolute;
+  top: 11vh;
+  left: 0;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid gray;
+  min-height: 37vh;
+}
+.districtResult .filteredDist{
+  padding: 8px 20px;
+  cursor: pointer;
+}
+.districtResult .filteredDist:not(:last-child){
+  border-bottom: 1px solid gray;
+}
+
+.card {
+  padding: 0 !important;
+}
+.cardBody {
+  margin-top: -15px;
+}
+/* card title */
+.addTitle {
+  font-size: 22px !important;
+  color: #393939 !important;
+  padding: 15px 40px 0 40px;
+  margin-top: 10px;
+  margin-bottom: 0px !important;
+}
+/* calc item */
+.calcItem {
+  height: fit-content;
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  padding: 15px 0;
+  border-bottom: 1px solid #ccc;
+}
+.calcItem:last-child {
+  border: none;
+}
+.calcItem div p {
+  margin: 0;
+}
+.calcItem div p strike {
+  font-size: 13px;
+  margin-right: 8px;
+}
+/* voucher */
+.voucherBlockClose,
+.voucherBlockOpen {
+  padding: 15px 20px;
+  height: auto;
+  transition: all 1s;
+}
+.voucherBlockHeading {
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+  font-weight: 500;
+}
+.voucherBlockOpen .voucherBlockHeading {
+  padding-bottom: 20px;
+  border-bottom: 1px solid #ccc;
+}
+.voucherFormClose {
+  display: none;
+}
+.voucherFormOpen form {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-top: 20px;
+}
+.voucherFormOpen form label {
+  display: block;
+  width: 100%;
+  text-align: left;
+}
+.voucherFormOpen form input {
+  width: 100%;
+  padding: 10px 20px;
+  font-size: 15px;
+  outline: none;
+  border: 1px solid #ccc;
+}
+.voucherFormOpen form small {
+  margin-top: 10px;
+  margin-bottom: -20px;
+  text-align: left;
+}
+.submitBtnForMobile{
+  display: none;
+  width: calc(100% - 50px);
+  margin: auto;
+  margin-top: 2rem;
+  padding: 8px 16px;
+  background: var(--color-brown);
+  color: #fff;
+  font-size: 14px;
+  outline: none;
+  border: none;
+}
+/* ////////////////////////////////////////////////////////////////////////////////////////////// */
+/* =============================== EMPTY CART =========================== */
+.emptyCartContainer {
+  width: 100%;
+  min-height: 75vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.emptyCartContainer div {
+  height: fit-content;
+  width: fit-content;
+  text-align: center;
+}
+.emptyCartContainer div h1 {
+  margin-top: 20px;
+  font-size: 1.9rem;
+  color: var(--color-brown);
+}
+.emptyCartContainer div p {
+  font-size: 18px;
+  color: var(--color-brown-light);
+}
+.emptyCartContainer div a {
+  display: block;
+  margin-top: 20px;
+  color: #fff;
+  background-color: var(--color-brown);
+  padding: 10px 30px;
+  border-radius: 4px;
+  font-family: 16px;
+  font-weight: bold;
+  transition: 0.4s;
+}
+.emptyCartContainer div a:hover {
+  text-decoration: none;
+  background-color: var(--color-brown-light);
+}
+
+/* ////////////////////////////////////////////////////////////////////////////////////////////// */
+/* ======================================= Addess Edit Modal =================================== */
+.addressModalContainer {
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 4000;
+}
+.addressModal {
+  width: 35%;
+  height: 70vh;
+  background-color: #fff;
+  padding: 40px;
+  position: relative;
+}
+.addressModal h3 {
+  text-align: center;
+  color: var(--color-brown);
+}
+.addressModal .icon {
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  cursor: pointer;
+}
+.addressModal .icon:hover {
+  transform: scale(1.2);
+}
+
+.addressModal form .inputContainer {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+}
+label {
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: gray;
+}
+.inputContainer input,
+.inputContainer textarea {
+  border: 1px solid #ccc;
+  font-size: 15px;
+  padding: 10px 20px;
+  outline: none;
+}
+.addressModal .submit {
+  width: 100%;
+  padding: 10px 20px;
+  text-align: center;
+  color: #fff;
+  background: var(--color-brown);
+  outline: none;
+  border: none;
+  margin-top: 30px;
+  font-size: 17px;
+}
+
+/* ////////////////////////////////////////////////////////////////////////////////////////////// */
+/* ======================================= Addess Edit Modal =================================== */
+.successCartContainer,
+.failedCartContainer {
+  width: 100%;
+  min-height: 70vh;
+  text-align: center;
+}
+.successCartContainer img,
+.failedCartContainer img{
+  height: 50vh;
+}
+.successCartContainer h3,
+.failedCartContainer h3{
+  font-size: 2rem;
+  margin-top: -2rem;
+  color: #13c37b;
+}
+.failedCartContainer h3{
+  color: #ef5350;
+}
+.successCartContainer p,
+.failedCartContainer p{
+  width: 30%;
+  margin: auto;
+  font-size: 18px;
+}
+.successCartContainer p a,
+.failedCartContainer p span{
+  text-decoration: none;
+  color: var(--color-brown-light);
+  cursor: pointer;
+}
+.successCartContainer p a:hover,
+.failedCartContainer p a:hover{
+  text-decoration: none;
+}
+
+@media screen and (max-width: 1376px) {
+  .cartContainer { max-width: 90% !important; margin-top: 25px; margin-bottom: 35px; }
+  .CartHead .cartHeadLeft h1 { font-size: 1.5rem; }
+  .CartHead .cartHeadLeft h1 span { font-size: 14px; }
+  .CartHead .cartHeadRight h3 { font-size: 16.5px; line-height: 16.5px; }
+  .CartHead .cartHeadRight p { font-size: 12px; }
+  .selectedBook { padding: 14px 24px; }
+  .imgcart { width: 105px !important; height: 150px !important; }
+  .infoContainer h3 { font-size: 18px; }
+  .infoContainer p { font-size: 13px; }
+  .infoContainer i { left: 14px; font-size: 18px; }
+}
+
+@media screen and (max-width: 1200px) {
+  .imgcart { width: 100px !important; height: 147px !important; }
+}
+
+@media screen and (max-width: 480px) {
+  .cartPage { padding: 70px 0 0 0; background: #fff; }
+  .cartContainer { max-width: 100% !important; margin-bottom: 40px; }
+  .CartPart { height: 85vh; width: 100% !important; margin-bottom: 2rem; }
+  .calculation{ width: 100% !important; }
+  .CartHead {padding: 0 20px 10px 20px;}
+  .CartHead .cartHeadLeft h1 { font-size: 1.4rem; }
+  .CartHead .cartHeadLeft h1 span { font-size: 12px; }
+  .CartHead .cartHeadRight h3 { font-size: 14px; line-height: 14px; }
+  .CartHead .cartHeadRight p { font-size: 12px; }
+  
+  .selectedBooks { height: 80vh; border: 1px solid #dee2e6; padding-right: 5px; border-radius: 5px;}
+  .selectedBooks::-webkit-scrollbar { width: 3px; }
+  .selectedBook { padding: 20px 0; border-bottom: 1px solid #dee2e6; }
+  .checkBoxContainer { display: none; }
+  .checkBoxContainer form { display: none; }
+  .ChekBox { display: none; }
+  .imageContainer { max-width: 20% !important; }
+  .imgcart { width: 60px !important; height: 80px !important; margin-right: 20px;}
+  .infoContainer {max-width: 60% !important; }
+  .infoContainer h3 { font-size: 14px; text-align: left; }
+  .infoContainer p { font-size: 11px; line-height: 11px; }
+  .infoContainer p.priceForMobile { display: block; }
+  .infoContainer p.priceForMobile strike{ font-size: 11px; color: gray; }
+  .infoContainer i { font-size: 16px; left: 80%; bottom: -12px;}
+  .priceContainer{ display: none !important; }
+  .buttonContainer{ display: none !important; }
+  .incBtnForMobile{ max-width: 20px !important; display: block; margin-top: -10px; }
+  .incBtnForMobile .buttton{ 
+    width: 20px; height: 20px; padding: 15px;
+    display: flex; align-items: center; justify-content: center;
+    background-color: #f5f5f5; border: 1px solid #dee2e6;
+  }
+  .incBtnForMobile .buttton:nth-child(2){
+    border: none;
+    border-left: 1px solid #dee2e6;
+    border-right: 1px solid #dee2e6;
+    background: #fff;
+  }
+  .odrBtn{ display: none; }
+
+  .deliverySelectionForm { margin-bottom: 15px;}
+  .cardBody { margin-top: -25px; }
+  .addTitle { font-size: 18px !important; padding: 0 2rem; }
+  .voucherBlockHeading{ font-weight: normal; }
+
+  .addressModal { width: 90%; height: 70vh; padding: 40px 25px; }
+  .addressModal .icon { right: 25px; }
+  .addressModal form .inputContainer { margin-bottom: 20px; }
+  .inputContainer input,
+  .inputContainer textarea { font-size: 14px; padding: 8px 15px; }
+  .addressModal .submit { padding: 8px 15px; margin-top: 20px; font-size: 14px; }
+  .submitBtnForMobile{ display: block; }
+  
+  .emptyCartContainer { min-height: 95vh; }
+  .emptyCartContainer div img{ width: 60%; }
+  .emptyCartContainer div h1 { font-size: 1.4rem; }
+  .emptyCartContainer div p { font-size: 13px; }
+  .emptyCartContainer div a { border-radius: 2px; font-size: 14px; font-weight: normal; }
+
+  .successCartContainer,
+  .failedCartContainer { min-height: 95vh; }
+  .successCartContainer img,
+  .failedCartContainer img{
+    margin-top: 20vh;
+    height: 35vh;
+  }
+  .successCartContainer h3,
+  .failedCartContainer h3{ font-size: 1.2rem; }
+  .successCartContainer p,
+  .failedCartContainer p{ width: 85%; font-size: 14px; }
 }

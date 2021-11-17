@@ -3,12 +3,16 @@ import { connect } from "react-redux";
 import { Modal } from "react-bootstrap";
 import { Formik, Form, Field } from "formik";
 import { Form as BootstrapForm, InputGroup } from "react-bootstrap";
+import MDEditor from "@uiw/react-md-editor";
 import * as Yup from "yup";
 import swal from "sweetalert";
-import { blogModalToggleAction } from "../../../Actions/Admin/BlogActions";
+import {
+  addBlog,
+  blogModalToggleAction,
+} from "../../../Actions/Admin/BlogActions";
 import styles from "./BlogModal.module.css";
 
-const BlogModal = ({ blogModalToggleAction, open }) => {
+const BlogModal = ({ blogModalToggleAction, open, addBlog }) => {
   const [selectedFile, setSelectedFile] = useState();
   const [preview, setPreview] = useState();
   // create a preview as a side effect, whenever selected file is changed
@@ -37,9 +41,21 @@ const BlogModal = ({ blogModalToggleAction, open }) => {
   };
 
   const onSubmitHandeler = (values) => {
-    //Blog ACTION CALL
-    swal("Blog Added!", "", "success");
-    console.log(values);
+    if (!selectedFile) {
+      swal("Please Select Image", "", "error");
+    } else {
+      //Blog ACTION CALL
+      let flag = addBlog(values, selectedFile);
+      if (flag) {
+        swal("Blog Added!", "", "success");
+        setSelectedFile(undefined);
+        setPreview(undefined);
+        blogModalToggleAction();
+      } else {
+        swal("Error", "", "error");
+      }
+    }
+    //console.log(values);
   };
   const initVals = {
     title: "",
@@ -70,7 +86,7 @@ const BlogModal = ({ blogModalToggleAction, open }) => {
           validationSchema={SignupSchema}
           onSubmit={(values) => onSubmitHandeler(values)}
         >
-          {({ errors, touched }) => (
+          {({ errors, touched, values, setFieldValue }) => (
             <Form
               className="py-2 pr-3 pr-md-0"
               id="signup__form"
@@ -79,7 +95,7 @@ const BlogModal = ({ blogModalToggleAction, open }) => {
               <InputGroup className="mb-3 d-flex flex-column">
                 <div className="d-flex justify-content-between align-items-center">
                   <label htmlFor="title" className="d-block">
-                    Book Title
+                    Blog Title
                   </label>
                   {errors.title && touched.title ? (
                     <small className="text-danger">{errors.title}</small>
@@ -87,7 +103,7 @@ const BlogModal = ({ blogModalToggleAction, open }) => {
                 </div>
                 <Field
                   as={BootstrapForm.Control}
-                  placeholder="Book Name*"
+                  placeholder="Blog Name*"
                   name="title"
                   isValid={!errors.title && touched.title}
                   type="text"
@@ -105,12 +121,20 @@ const BlogModal = ({ blogModalToggleAction, open }) => {
                     <small className="text-danger">{errors.description}</small>
                   ) : null}
                 </div>
-                <Field
+                {/* <Field
                   as="textarea"
                   name="description"
                   placeholder="Short Description"
                   style={{ minHeight: "200px" }}
                   className={`${styles.input} form-control w-100`}
+                /> */}
+                <MDEditor
+                  value={values.description}
+                  onChange={(e) => {
+                    //console.log(e);
+                    setFieldValue("description", e);
+                  }}
+                  name="description"
                 />
               </InputGroup>
 
@@ -127,7 +151,7 @@ const BlogModal = ({ blogModalToggleAction, open }) => {
                 />
 
                 <BootstrapForm.File.Label data-browse="Browse">
-                  Book Cover Image
+                  Blog Cover Image
                 </BootstrapForm.File.Label>
                 {errors.image && touched.image ? (
                   <small className="text-danger">{errors.image}</small>
@@ -160,7 +184,9 @@ const BlogModal = ({ blogModalToggleAction, open }) => {
 };
 
 const mapStateToProps = (state) => ({
-  open: state.admin_page.blog_modal,
+  open: state.admin_blog_page.blog_modal,
 });
 
-export default connect(mapStateToProps, { blogModalToggleAction })(BlogModal);
+export default connect(mapStateToProps, { blogModalToggleAction, addBlog })(
+  BlogModal
+);

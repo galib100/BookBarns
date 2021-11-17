@@ -1,4 +1,43 @@
+.modal{
+  z-index: 4000 !important;
+}
+
 .heading {
   color: var(--color-brown) !important;
   text-align: center !important;
+}
+
+.inputGroup{
+  position: relative !important;
+}
+.inputGroup span{
+  position: absolute;
+  bottom: 10px;
+  right: 14px;
+  cursor: pointer;
+}
+
+.notHaveAccoun{
+  text-align: center;
+  font-size: 14px;
+}
+
+.notHaveAccoun span{
+  margin-left: 10px;
+  color: var(--color-brown-light);
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+.notHaveAccoun span:hover{
+  color: var(--color-brown);
+}
+
+.submit{
+  width: 100%;
+  background-color: var(--color-brown);
+  color: #fff;
+  padding: 10px 20px;
+  text-align: center;
+  font-size: 16px;
 }

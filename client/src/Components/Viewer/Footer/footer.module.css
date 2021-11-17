@@ -1,45 +1,76 @@
-.FtrSec{
-    margin-top: 200px;
-}
-.frtRow{
-    margin-bottom:130px;
-    margin-top:40px;
-}
-
-.foot_img{
-padding: 15px;
-}
-.footText{
-    color:#73706E !important;
-    font-size:18px ;
-    margin-top:85px !important;
-}
-.frtTxt{
-    color:#73706E !important;
-}
-.frtIcon{
-    color:var(--color-brown) !important;
-    font-size:20px !important;
-}
-.assciateTxt{
-    font-size:20px !important;
-    font-weight:400;
-    margin-bottom:80px;
-
+.footercontainer{ 
+  max-width: 100% !important; 
+  padding: 50px 120px 50px 150px !important; 
+  display: flex;
+  flex-wrap: wrap;
 }
 
-.listText{
-    padding-bottom: 20px;
-    text-decoration: none !important;
-    color:#73706E !important;
+/* ==================== Text class ==================== */
+.frtTxt {width: 35%; color: #73706e !important; }
+.frtTxt img{ height: 70px; }
+.socialLinks{ 
+  display: flex;
+  align-items: center;
 }
-.lastLine{
-    margin-bottom: 60px;
-    font-style: 18px;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+.socialLinks div{
+  margin-right: 15px;
+  color: var(--color-brown);
 }
-.lastHr{
-    height: 5px;
-    background: var(--color-brown);
-    margin-bottom:0px !important;
+.socialLinks div a{
+  font-size: 20px;
+  color: var(--color-brown);
+  transition: 0.4s;
+}
+.socialLinks div a:hover{
+  color: var(--color-brown-light);
+}
+
+/* ==================== Menu class ==================== */
+.frtMenu{
+  width: 20%;
+}
+.footText {
+  color: #73706e !important;
+  font-size: 18px;
+  margin-top: 45px !important;
+}
+.listText {
+  padding-bottom: 20px;
+  text-decoration: none !important;
+  color: #73706e !important;
+}
+
+/* ==================== Association class ==================== */
+.frtAsso{
+  width: 25%;
+}
+.assoImg{
+  margin-top: 45px;
+}
+.assoImg img{
+  width: 70%;
+}
+/* ==================== App class ==================== */
+.frtapp{
+  width: 20%;
+}
+
+
+/* copyright text & and last design */
+.lastLine { padding: 20px 120px; font-style: 18px; display: flex; }
+.lastLine div{ font-weight: 600; margin-right: 5px;}
+.lastHr { height: 10px; background: var(--color-brown); margin-bottom: 0px !important; }
+
+@media screen and (max-width: 480px) {
+  .footercontainer{  padding: 25px !important;  }
+  .lastLine div{ font-weight: 600; font-size: 14px;}
+  .frtTxt{ width: 100%; margin-bottom: 40px;}
+  .frtMenu{ width: 100%; margin-bottom: 40px;}
+  .listText{ padding-bottom: 10px; font-size: 13px; }
+  .footText{ margin-top: 20px !important; }
+  .frtAsso{ width: 100%; margin-bottom: 40px;}
+  .assoImg{ margin-top: 10px;}
+  .assoImg img{ width: 50%; }
+  .frtapp{ width: 100%; }
+  .lastLine { padding: 20px; font-style: 12px; }
 }

@@ -9,6 +9,10 @@ import { preOrderModalToggleAction } from "../../../Actions/Admin/PreOrderAction
 import { trendingModalToggleAction } from "../../../Actions/Admin/TrendingActions";
 import styles from "./PageHeader.module.css";
 import { connect } from "react-redux";
+import { addCategoryModalToggleAction } from "../../../Actions/Admin/CategoryActions";
+import { addCuponModalToggleAction } from "../../../Actions/Admin/CuponActions";
+import { addPublisherModalToggleAction } from "../../../Actions/Admin/PublisherActions";
+import { addAuthorModalToggleAction } from "../../../Actions/Admin/AuthorActions";
 
 const PageHeader = ({
   title,
@@ -23,6 +27,10 @@ const PageHeader = ({
   onSaleModalToggleAction,
   preOrderModalToggleAction,
   trendingModalToggleAction,
+  addCategoryModalToggleAction,
+  addCuponModalToggleAction,
+  addPublisherModalToggleAction,
+  addAuthorModalToggleAction,
 }) => {
   const clickHandeler = () => {
     if (modal === "blog") {
@@ -37,6 +45,14 @@ const PageHeader = ({
       preOrderModalToggleAction();
     } else if (modal === "trending") {
       trendingModalToggleAction();
+    } else if (modal === "add_category") {
+      addCategoryModalToggleAction();
+    } else if (modal === "add_cupon") {
+      addCuponModalToggleAction();
+    } else if (modal === "publisher") {
+      addPublisherModalToggleAction();
+    } else if (modal === "author") {
+      addAuthorModalToggleAction();
     }
   };
 
@@ -72,4 +88,8 @@ export default connect(null, {
   onSaleModalToggleAction,
   preOrderModalToggleAction,
   trendingModalToggleAction,
+  addCategoryModalToggleAction,
+  addCuponModalToggleAction,
+  addPublisherModalToggleAction,
+  addAuthorModalToggleAction,
 })(PageHeader);

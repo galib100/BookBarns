@@ -10,12 +10,22 @@ import * as Yup from "yup";
 import { Formik, Form, Field } from "formik";
 import swal from "sweetalert";
 import styles from "./LoginForm.module.css";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import { connect } from "react-redux";
+import { login } from "../../../Actions/Admin/AuthActions";
 
-const LoginForm = () => {
-  const onSubmitHandeler = (values) => {
-    swal("Success!", "Login Success", "success");
-    console.log(values);
+const LoginForm = ({ login }) => {
+  const history = useHistory();
+  const onSubmitHandeler = async (values) => {
+    let check = await login(values.username, values.password);
+
+    if (check === true) {
+      swal("Success!", "Login Success", "success");
+      history.push("/admin/dashboard");
+    } else {
+      swal("Login Fail!", "Check Username and Password", "error");
+    }
+    //console.log(values);
   };
 
   let initVals = {
@@ -103,11 +113,11 @@ const LoginForm = () => {
           </Formik>
         </Card.Body>
       </Card>
-      <Link to="/admin/dashboard" className="mt-5">
+      <Link to="/" className="mt-5">
         <u> Go ot Oboshor home</u>
       </Link>
     </Container>
   );
 };
 
-export default LoginForm;
+export default connect(null, { login })(LoginForm);

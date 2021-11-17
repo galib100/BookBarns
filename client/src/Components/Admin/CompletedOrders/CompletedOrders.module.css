@@ -10,6 +10,19 @@
   align-items: center;
 }
 
+.date__wrapper {
+  background: var(--color-primary-light);
+  padding: 5px 10px;
+  color: var(--color-secondary);
+  margin-right: 15px;
+  height: 32px;
+  width: 50%;
+  font-size: 12px !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .search {
   outline: none;
   border: none;

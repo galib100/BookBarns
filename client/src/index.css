@@ -1,10 +1,23 @@
+/* @import url(./Assets/fonts/HindSiliguri-Regular.ttf); */
+/* English Font */
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap");
+/* Bangla font */
+/* @import url("https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600&display=swap"); */
+/* @import url("https://fonts.maateen.me/solaiman-lipi/font.css"); */
 
+/* @font-face {
+  font-family: "Hind Siliguri";
+  src: url("./Assets/fonts/HindSiliguri-Regular.ttf") format("truetype");
+} */
+@font-face {
+  font-family: "SolaimanLipi";
+  src: url("./Assets/fonts/solaimanlipi.ttf") format("truetype");
+}
 :root {
   --color-dark: #222222;
   --color-secondary: #777777;
-  --color-brown: #138ea3;
-  --color-brown-light: #0dccee;
+  --color-brown: #52341e;
+  --color-brown-light: #d2935a;
   --color-primary: #486be1;
   --color-purple: #6c63ff;
   --color-primary-light: #e4f6ff;
@@ -14,9 +27,7 @@
 
 body {
   margin: 0;
-  font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Roboto",
-    "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
-    "Helvetica Neue", sans-serif;
+  font-family: "SolaimanLipi", "Open Sans", sans-serif !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   --light: #f5f5f5 !important;
@@ -44,6 +55,54 @@ code {
   text-decoration: none !important;
   transition: 0.3s all ease-in-out;
 }
-#viewer_nav .nav-link{
-text-decoration: none !important;
+#viewer_nav .nav-link {
+  text-decoration: none !important;
+}
+
+/* PDF WATERMARK */
+/* .k-pdf-export::before {
+  position: relative;
+  display: block;
+  content: "";
+  width: 60px;
+  height: 60px;
+  background: url(./Assets/watermark.png) red;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+} */
+/* .k-pdf-export #dwnBtn__PDF {
+  display: none !important;
+}
+
+#dwnBtn__PDF {
+  display: block;
+} */
+/* .k-pdf-export #delete__btn__PDF {
+  display: none !important;
+}
+
+#delete__btn__PDF {
+  display: block;
+}
+.k-pdf-export #hidezone__PDF {
+  display: flex !important;
+  font-family: "Hind Siliguri";
+}
+
+#hidezone__PDF {
+  display: none;
+} */
+
+.custom__link:hover {
+  color: #222222 !important;
+}
+
+.form-control.is-valid,
+.was-validated .form-control:valid {
+  background-image: none !important;
+}
+.form-control.is-invalid,
+.was-validated .form-control:invalid {
+  background-image: none !important;
 }

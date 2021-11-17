@@ -2,11 +2,21 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { Modal } from "react-bootstrap";
 import swal from "sweetalert";
-import { trendingModalToggleAction } from "../../../Actions/Admin/TrendingActions";
+import {
+  trendingAdd,
+  trendingEdit,
+  trendingModalToggleAction,
+} from "../../../Actions/Admin/TrendingActions";
 import styles from "./TrendingModal.module.css";
-import data from "../data/bestSellerBook";
 
-const TrendingModal = ({ trendingModalToggleAction, open, book }) => {
+const TrendingModal = ({
+  trendingModalToggleAction,
+  trendingAdd,
+  open,
+  book,
+  data,
+  trendingEdit,
+}) => {
   const [selectedBook, setSelectedBook] = useState(book ? book : {});
   const [search, setSearch] = useState("");
   const [list, setList] = useState([]);
@@ -21,12 +31,20 @@ const TrendingModal = ({ trendingModalToggleAction, open, book }) => {
     e.preventDefault();
     if (book) {
       //Edit BOOK SUBMIT ACTION CALL
+      trendingEdit(book._id, selectedBook._id);
       swal("Book Modified!", "", "success");
+      handleClose();
     } else {
-      //ADD BOOK SUBMIT ACTION CALL
-      swal("Book Added!", "", "success");
+      if (selectedBook._id) {
+        //ADD BOOK SUBMIT ACTION CALL
+        trendingAdd(selectedBook._id);
+        //console.log(selectedBook);
+        swal("Book Added!", "", "success");
+        handleClose();
+      } else {
+        swal("Please select a book", "", "info");
+      }
     }
-    trendingModalToggleAction();
   };
 
   const onChangeHandeler = (text) => {
@@ -43,13 +61,15 @@ const TrendingModal = ({ trendingModalToggleAction, open, book }) => {
   };
 
   const selectItem = (id) => {
-    setSelectedBook(...data.filter((item) => item.id === id));
+    setSelectedBook(...data.filter((item) => item._id === id));
     setList([]);
+    setSearch(data.filter((item) => item._id === id)[0].title);
   };
 
   const handleClose = () => {
     trendingModalToggleAction();
     setSelectedBook({});
+    setSearch("");
   };
 
   return (
@@ -69,8 +89,8 @@ const TrendingModal = ({ trendingModalToggleAction, open, book }) => {
           />
           <div className="list-group">
             {list.map((item) => (
-              <div key={item.id} className={`${styles.item} list-group-item`}>
-                <span onClick={() => selectItem(item.id)}>{item.title}</span>
+              <div key={item._id} className={`${styles.item} list-group-item`}>
+                <span onClick={() => selectItem(item._id)}>{item.title}</span>
               </div>
             ))}
           </div>
@@ -109,10 +129,13 @@ const TrendingModal = ({ trendingModalToggleAction, open, book }) => {
 };
 
 const mapStateToProps = (state) => ({
-  open: state.admin_page.trending_modal,
-  book: state.admin_page.trending_book,
+  open: state.admin_book_page.trending_modal,
+  book: state.admin_book_page.trending_book,
+  data: state.admin_book_page.books,
 });
 
-export default connect(mapStateToProps, { trendingModalToggleAction })(
-  TrendingModal
-);
+export default connect(mapStateToProps, {
+  trendingModalToggleAction,
+  trendingAdd,
+  trendingEdit,
+})(TrendingModal);

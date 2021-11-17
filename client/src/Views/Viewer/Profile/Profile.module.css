@@ -1,0 +1,736 @@
+.profileContainer {
+  width: 100%;
+  min-height: 100vh;
+}
+
+.profile__banner {
+  width: 100%;
+  height: 425px;
+  background: linear-gradient(
+      to bottom,
+      rgba(82, 52, 30, 0.3),
+      rgba(82, 52, 30, 0.4)
+    ),
+    url("../../../Assets/Viewer/Profile/banner.jpg");
+}
+.profe__infobolck {
+  width: 70%;
+  margin: auto;
+  margin-top: -270px;
+  min-height: 80vh;
+  padding: 8px;
+  background: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  border-bottom: 4px solid var(--color-brown);
+  border-radius: 5px;
+}
+
+/* ////////////////////////////////////////////////////////////// */
+/* Profile name */
+.profile__name {
+  height: 100px;
+  background: var(--color-brown);
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40px;
+  border-radius: 5px;
+}
+.name {
+  width: 50%;
+  height: 90px;
+  padding: 15px 0;
+}
+.name h3 {
+  font-size: 1.6rem;
+  line-height: 1.6rem;
+}
+.name p {
+  font-size: 14px;
+  line-height: 14px;
+  cursor: pointer;
+  transition: 0.4s;
+}
+.name p:hover {
+  color: #ccc;
+}
+
+.optionForMobile {
+  display: none;
+}
+.option {
+  width: 60%;
+  height: 90px;
+  text-align: right;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+.option .button {
+  font-size: 14px;
+  line-height: 14px;
+  cursor: pointer;
+  background: #fff;
+  color: var(--color-brown);
+  padding: 10px 30px;
+  margin-bottom: 15px;
+}
+.option .editButton {
+  display: flex;
+  padding: 0;
+  justify-content: flex-start;
+}
+.option .editButton div:not(:last-child) {
+  padding: 10px;
+}
+.option .editButton div:last-child {
+  padding: 10px 20px;
+  border-left: 1px solid var(--color-brown);
+}
+.option div:not(:last-child) {
+  margin-right: 20px;
+}
+
+/* ////////////////////////////////////////////////////////////// */
+/* Basic Info */
+.profile__basicInfo {
+  display: flex;
+}
+.profile__basic {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 40px;
+}
+.editbutton {
+  width: fit-content;
+  background: var(--color-brown);
+  color: #fff;
+  display: flex;
+  margin: auto;
+  margin-top: 50px;
+  cursor: pointer;
+}
+.editbutton div {
+  padding: 10px 20px;
+}
+.editbutton div:last-child {
+  border-left: 1px solid var(--color-brown-light);
+}
+.info {
+  width: 50%;
+  display: flex;
+  margin-top: 40px;
+  padding: 0 0 0 12px;
+}
+.info__logo,
+.info__logo_loading {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-brown);
+  color: #fff;
+  margin-right: 20px;
+}
+.info__logo_loading {
+  background: transparent;
+}
+.info__value h6 {
+  font-size: 18px;
+  line-height: 18px;
+}
+.info__value p {
+  color: #777777;
+  font-size: 12px;
+  line-height: 12px;
+}
+.line {
+  height: 1px;
+  width: 90%;
+  margin: auto;
+  margin-top: 60px;
+  background: #ccc;
+}
+
+/* ////////////////////////////////////////////////////////////// */
+/* Orders block */
+.allOrders {
+  padding: 40px 55px;
+}
+.allOrders h2 {
+  font-size: 1.5rem;
+  color: var(--color-brown);
+}
+.orderTable {
+  margin-top: 30px;
+}
+.tableItem {
+  display: flex;
+  padding: 15px 0;
+}
+.tableItem:not(:last-child) {
+  border-bottom: 1px solid #ccc;
+}
+.tableItem div {
+  color: #222;
+  font-size: 15.5px;
+}
+.tableItem.tableHead div {
+  font-weight: 500;
+}
+.tableHeadForMobile {
+  display: none;
+}
+.item__id {
+  width: 15%;
+}
+.item__address {
+  width: 35%;
+}
+.item__phone {
+  width: 20%;
+}
+.item__status {
+  width: 15%;
+}
+.item__button {
+  width: 15%;
+}
+.item__status div {
+  width: 70%;
+  height: 35px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.item__status .statConfirm {
+  background: linear-gradient(-45deg, #2d4bb3, #486be1);
+}
+.item__status .statProcessing {
+  background: linear-gradient(-45deg, #681d7e, #aa36cc);
+}
+.item__status .statShipped {
+  background: linear-gradient(-45deg, #d49705, #eb6519);
+}
+.item__status .statDelivered {
+  background: linear-gradient(-45deg, #1b8a23, #48e14d);
+}
+.item__status .statCanceled {
+  background: linear-gradient(-45deg, #f34630, #a70606);
+}
+.item__status .statPlaced {
+  background: linear-gradient(-45deg, #50b7e7, #0680b9);
+}
+.item__button a {
+  text-decoration: none;
+  width: 65%;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: #fff;
+  background: var(--color-brown);
+  transition: 0.4s;
+}
+.item__button a span:last-child {
+  display: none;
+}
+.item__button a:hover {
+  text-decoration: none;
+  background: var(--color-brown-light);
+  color: #fff;
+}
+.emptyOrder {
+  min-height: 40vh;
+  width: 100%;
+  text-align: center;
+  padding: 50px;
+}
+.emptyOrder img {
+  width: 20%;
+  margin-bottom: 20px;
+}
+.emptyOrder h3 {
+  color: var(--color-brown);
+}
+
+/* ////////////////////////////////////////////////////////////// */
+/* Profile Edit form */
+.profileEditFormContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+  z-index: 4000;
+}
+.profileEditForm {
+  height: 90vh;
+  width: 35%;
+  background-color: #fff;
+  position: relative;
+  padding: 40px;
+}
+.passChangeForm {
+  height: 70vh;
+}
+.profileEditForm .icon {
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  transition: 0.4s;
+  cursor: pointer;
+}
+.profileEditForm .icon:hover {
+  transform: scale(1.1);
+}
+.profileEditForm h3 {
+  color: var(--color-brown);
+  text-align: center;
+  font-size: 1.5rem;
+}
+form .profileFormInputCont {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+form .profileFormInputCont label {
+  font-size: 12px;
+  color: gray;
+  margin-bottom: 3px;
+}
+form .profileFormInputCont input {
+  padding: 10px 20px;
+  font-size: 15px;
+  outline: none;
+}
+input.address {
+  height: 100px;
+}
+form .profileFormInputCont button {
+  width: 100%;
+  padding: 15px 30px;
+  background: var(--color-brown);
+  font-size: 15px;
+}
+.inputBox {
+  position: relative;
+}
+.inputBox input {
+  width: 100%;
+}
+.inputBox .logo {
+  padding: 5px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 15px;
+  cursor: pointer;
+}
+
+/* ////////////////////////////////////////////////////////////// */
+/* Media - 1370px */
+@media screen and (max-width: 1370px) {
+  .profile__banner {
+    height: 370px;
+  }
+  .profe__infobolck {
+    width: 85%;
+    margin: auto;
+    margin-top: -200px;
+  }
+  .profileEditForm {
+    min-height: fit-content;
+    width: 40%;
+  }
+  .passChangeForm {
+    height: 65vh;
+  }
+  .profileEditForm h3 {
+    font-size: 1rem;
+    margin-bottom: -1.85rem;
+  }
+  form .profileFormInputCont {
+    margin-bottom: 15px;
+  }
+  form .profileFormInputCont label {
+    font-size: 10px;
+  }
+  form .profileFormInputCont input {
+    padding: 8px 10px;
+    font-size: 13.5px;
+  }
+  input.address {
+    height: fit-content;
+  }
+  form .profileFormInputCont button {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+}
+
+/* ////////////////////////////////////////////////////////////// */
+/* Media - 1028px */
+@media screen and (max-width: 1028px) {
+  .profile__banner {
+    height: 370px;
+  }
+  .profe__infobolck {
+    width: 90%;
+    margin: auto;
+    margin-top: -200px;
+  }
+  .profile__name {
+    height: 80px;
+    padding: 0 25px;
+  }
+  .name {
+    height: 70px;
+    padding: 10px 0;
+  }
+  .name h3 {
+    font-size: 1.1rem;
+    line-height: 1.1rem;
+  }
+  .name p {
+    font-size: 12px;
+    line-height: 12px;
+  }
+  .option {
+    width: 70%;
+    height: 70px;
+    margin-bottom: -10px;
+  }
+  .option .button {
+    font-size: 12px;
+    line-height: 12px;
+    padding: 8px 20px;
+  }
+  .option .button:first-child {
+    padding: 6px 20px;
+  }
+  .option .editButton div:not(:last-child) {
+    padding: 0;
+  }
+  .option .editButton div:last-child {
+    padding: 0;
+  }
+  .option div:not(:last-child) {
+    margin-right: 10px;
+  }
+  .profile__basic {
+    padding: 0 20px;
+  }
+  .info {
+    width: 50%;
+    display: flex;
+    margin-top: 40px;
+    padding: 0 0 0 12px;
+  }
+  .info__logo,
+  .info__logo_loading {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-brown);
+    color: #fff;
+    margin-right: 20px;
+  }
+  .info__logo_loading {
+    background: transparent;
+  }
+  .info__value h6 {
+    font-size: 18px;
+    line-height: 18px;
+  }
+  .info__value p {
+    color: #777777;
+    font-size: 12px;
+    line-height: 12px;
+  }
+  .allOrders {
+    padding: 20px 45px;
+  }
+  .allOrders h2 {
+    font-size: 1.2rem;
+  }
+  .orderTable {
+    margin-top: 20px;
+  }
+  .tableItem {
+    padding: 9px 0;
+  }
+  .tableItem div {
+    color: #222;
+    font-size: 12.5px;
+  }
+  .item__status div {
+    height: 28px;
+  }
+  .item__button a {
+    width: 65%;
+    height: 30px;
+  }
+  .profileEditForm {
+    min-height: fit-content;
+    width: 40%;
+  }
+  .passChangeForm {
+    height: 65vh;
+  }
+  .profileEditForm h3 {
+    font-size: 1rem;
+    margin-bottom: -1.85rem;
+  }
+  form .profileFormInputCont {
+    margin-bottom: 13px;
+  }
+  form .profileFormInputCont label {
+    font-size: 10px;
+  }
+  form .profileFormInputCont input {
+    padding: 6px 10px;
+    font-size: 12.5px;
+  }
+  input.address {
+    height: fit-content;
+  }
+  form .profileFormInputCont button {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+  form button {
+    padding: 7px 20px;
+  }
+}
+
+/* ////////////////////////////////////////////////////////////// */
+/* Media - 480px */
+@media screen and (max-width: 480px) {
+  .profile__banner {
+    display: none;
+  }
+  .profe__infobolck {
+    width: 100%;
+    margin-top: 0;
+    min-height: 100vh;
+    padding: 70px 25px 25px 25px;
+    border-radius: 3px;
+  }
+  .profile__name {
+    height: 70px;
+    padding: 0 20px;
+    border-radius: 3px;
+  }
+  .name {
+    width: 50%;
+    height: 70px;
+    padding: 10px 0;
+  }
+  .name h3 {
+    font-size: 1rem;
+    line-height: 1rem;
+  }
+  .name p {
+    font-size: 11px;
+    line-height: 11px;
+  }
+  .option {
+    display: none;
+  }
+  .optionForMobile {
+    width: 30%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .optionForMobile div {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #fff;
+    color: var(--color-brown);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .profile__basicInfo {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .profile__basic {
+    padding: 0;
+  }
+  .info {
+    width: 100%;
+    margin-top: 20px;
+    padding: 0;
+  }
+  .info__logo,
+  .info__logo_loading {
+    width: 30px;
+    height: 30px;
+    margin-right: 14px;
+  }
+  .info__logo_loading {
+    background: transparent;
+  }
+  .info__value h6 {
+    font-size: 16px;
+    line-height: 16px;
+  }
+  .line {
+    width: 100%;
+    margin: auto;
+    margin-top: 20px;
+  }
+  .allOrders {
+    padding: 25px 0;
+  }
+  .allOrders h2 {
+    font-size: 1.2rem;
+  }
+  .orderTable {
+    margin-top: 20px;
+  }
+  .tableItem {
+    padding: 10px 0;
+  }
+  .tableItem div {
+    color: #222;
+    font-size: 12.5px;
+  }
+
+  .tableHeadForMobile {
+    display: flex;
+    border-bottom: 1px solid #ccc;
+  }
+  .tableHeadForMobile div {
+    font-weight: 500;
+    font-size: 13px;
+    padding-bottom: 10px;
+  }
+  .tableHeadForMobile div:last-child {
+    text-align: right;
+  }
+  .tableHead {
+    display: none;
+  }
+  .item__id {
+    width: 30%;
+  }
+  .item__address {
+    display: none;
+  }
+  .item__phone {
+    width: 30%;
+  }
+  .item__status {
+    width: 20%;
+  }
+  .item__button {
+    width: 20%;
+  }
+  .item__status div {
+    width: 100%;
+    height: 25px;
+    font-weight: 500;
+    padding: 0;
+  }
+  .item__status .statConfirm {
+    color: #2d4bb3;
+    background: transparent;
+  }
+  .item__status .statProcessing {
+    color: #681d7e;
+    background: transparent;
+  }
+  .item__status .statShipped {
+    color: #eb6519;
+    background: transparent;
+  }
+  .item__status .statDelivered {
+    color: #48e14d;
+    background: transparent;
+  }
+  .item__status .statCanceled {
+    color: #f34630;
+    background: transparent;
+  }
+  .item__status .statPlaced {
+    color: #50b7e7;
+    background: transparent;
+  }
+  .item__button a {
+    width: 35px;
+    height: 35px;
+    margin-left: auto;
+    border-radius: 50%;
+  }
+  .item__button a span:not(:last-child) {
+    display: none;
+  }
+  .item__button a span:last-child {
+    display: block;
+  }
+  .emptyOrder {
+    min-height: 50vh;
+  }
+  .emptyOrder img {
+    width: 50%;
+  }
+
+  .profileEditForm {
+    height: 90vh;
+    width: 95%;
+    padding: 40px 25px;
+  }
+  .passChangeForm {
+    height: 60vh;
+  }
+  .profileEditForm .icon {
+    right: 25px;
+  }
+  .profileEditForm h3 {
+    font-size: 1.2rem;
+  }
+  form {
+    margin-top: 10px;
+  }
+  form .profileFormInputCont {
+    margin-bottom: 12px;
+  }
+  form .profileFormInputCont label {
+    font-size: 11px;
+  }
+  form .profileFormInputCont input {
+    padding: 8px 20px;
+    font-size: 13px;
+  }
+  input.address {
+    height: 80px;
+  }
+  form .profileFormInputCont button {
+    padding: 8px 30px;
+    font-size: 14px;
+  }
+  .inputBox {
+    position: relative;
+  }
+}

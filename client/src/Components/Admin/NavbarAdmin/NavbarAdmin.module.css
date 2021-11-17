@@ -4,6 +4,7 @@
 
 .user {
   height: 40px;
+  width: 40px;
 }
 
 .username {
@@ -22,6 +23,7 @@
 
 .nav__item:hover {
   color: var(--color-dark) !important;
+  cursor: pointer;
   font-size: 24px;
   transition: 0.3s all ease-in-out;
 }

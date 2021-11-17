@@ -1,15 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Row, Col, Card, CardDeck } from "react-bootstrap";
 import { RiCloseCircleFill } from "react-icons/ri";
 import { FaPen } from "react-icons/fa";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import swal from "sweetalert";
-import { heroCarouselModalToggleAction } from "../../../Actions/Admin/HeroCarouselActions";
+import {
+  deleteCarousel,
+  getCarousels,
+  heroCarouselModalToggleAction,
+} from "../../../Actions/Admin/HeroCarouselActions";
 import styles from "./HeroCarouselList.module.css";
-import data from "../data/carousel";
 import { connect } from "react-redux";
+import loadingImg from "../../../Assets/Admin/loading.gif";
+import { BASE_URL } from "../../../Constants/URL";
 
-const HeroCarouselList = ({ heroCarouselModalToggleAction }) => {
+const HeroCarouselList = ({
+  data,
+  loading,
+  heroCarouselModalToggleAction,
+  getCarousels,
+  deleteCarousel,
+}) => {
+  const [hero, setHero] = useState([]);
+
+  useEffect(() => {
+    if (!loading) {
+      setHero(data);
+    } else {
+      getCarousels();
+    }
+  }, [data]);
+
   const addBookHandeler = () => {
     //Add modal toggle action
     heroCarouselModalToggleAction();
@@ -24,55 +45,77 @@ const HeroCarouselList = ({ heroCarouselModalToggleAction }) => {
     }).then((willDelete) => {
       if (willDelete) {
         //DELETE ACTION OF THE BOOK USING ID
-
-        console.log(id);
-        swal("Book has been deleted!", {
-          icon: "success",
-        });
+        let result = deleteCarousel(id);
+        if (result) {
+          swal("Book has been deleted!", {
+            icon: "success",
+          });
+        } else {
+          swal("Something went wrong!", {
+            icon: "error",
+          });
+        }
       }
     });
   };
   return (
     <Row as={CardDeck} className="p-4 p-md-0 ">
-      {data.map((item) => (
-        <Col md={3} key={item.id} className="container-fluid my-3">
-          <Card className={`${styles.crd} h-100 `}>
-            <div className="">
-              <div className={`${styles.img__wrapper} text-center`}>
-                <img src={item.image} className={`img-fluid`} alt="" />
-              </div>
-            </div>
-            <Card.Footer className={`${styles.operations} mt-auto`}>
-              <span className={styles.caption}>{item.caption}</span>
-              <div className=" d-flex justify-content-center align-items-center">
-                <div
-                  className={styles.icon2}
-                  onClick={() => heroCarouselModalToggleAction(item.id)}
-                >
-                  <FaPen className={styles.pen} />
+      {loading ? (
+        <div className="col-12 py-5 text-center">
+          <img src={loadingImg} style={{ width: "100px" }} />
+        </div>
+      ) : (
+        <>
+          {hero.map((item) => (
+            <Col md={3} key={item._id} className="container-fluid my-3">
+              <Card className={`${styles.crd} h-100 `}>
+                <div className="">
+                  <div className={`${styles.img__wrapper} text-center`}>
+                    <img
+                      src={`${BASE_URL}/${item.image}`}
+                      className={`img-fluid`}
+                      alt=""
+                    />
+                  </div>
                 </div>
-                <RiCloseCircleFill
-                  className={styles.icon}
-                  onClick={() => deleteHandeler(item.id, item.caption)}
-                />
-              </div>
-            </Card.Footer>
-          </Card>
-        </Col>
-      ))}
-      <Col md={3} sm={6} className="my-3">
-        <Card
-          className={` ${styles.crd} ${styles.add__crd}`}
-          onClick={addBookHandeler}
-        >
-          <AiOutlinePlusCircle className={styles.plus} />
-          <span className={styles.add__text}>Add New</span>
-        </Card>
-      </Col>
+                <Card.Footer className={`${styles.operations} mt-auto`}>
+                  <span className={styles.caption}>{/*item.link*/}</span>
+                  <div className=" d-flex justify-content-center align-items-center">
+                    <div
+                      className={styles.icon2}
+                      onClick={() => heroCarouselModalToggleAction(item._id)}
+                    >
+                      <FaPen className={styles.pen} />
+                    </div>
+                    <RiCloseCircleFill
+                      className={styles.icon}
+                      onClick={() => deleteHandeler(item._id, item.link)}
+                    />
+                  </div>
+                </Card.Footer>
+              </Card>
+            </Col>
+          ))}
+          <Col md={3} sm={6} className="my-3">
+            <Card
+              className={` ${styles.crd} ${styles.add__crd}`}
+              onClick={addBookHandeler}
+            >
+              <AiOutlinePlusCircle className={styles.plus} />
+              <span className={styles.add__text}>Add New</span>
+            </Card>
+          </Col>
+        </>
+      )}
     </Row>
   );
 };
-
-export default connect(null, { heroCarouselModalToggleAction })(
-  HeroCarouselList
-);
+const mapStateToProps = (state) => ({
+  data: state.auth_hero.carousels,
+  loading: state.auth_hero.loading,
+});
+export default connect(mapStateToProps, {
+  heroCarouselModalToggleAction,
+  getCarousels,
+  deleteCarousel,
+})(HeroCarouselList);

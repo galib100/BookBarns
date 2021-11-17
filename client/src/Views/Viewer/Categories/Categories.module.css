@@ -1,0 +1,157 @@
+.categoriesContainer {
+  width: 100%;
+  min-height: 100vh;
+  padding: 50px 129px;
+}
+.categoriesContainer h4 {
+  margin-bottom: 25px;
+  position: relative;
+}
+.categoriesContainer h4::before {
+  content: "";
+  position: absolute;
+  width: 60px;
+  height: 3px;
+  background: var(--color-brown-light);
+  bottom: -10px;
+  left: 0;
+}
+
+/* //////////////////////////////////////////////////////////////// */
+/* ===================== CATEGORY NAME ============================ */
+.categoryName {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff !important;
+}
+.categoryName div a,
+.categoryName div svg {
+  color: #222;
+}
+.categoryName div a {
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 18px;
+  display: block;
+  width: fit-content;
+  color: var(--color-brown);
+}
+.categoryName div a:hover {
+  color: var(--color-brown-light);
+}
+.btn{
+  outline: none !important;
+  border: none !important;
+  color: var(--color-brown);
+}
+
+/* //////////////////////////////////////////////////////////////// */
+/* ===================== SUB CATEGORY NAME ============================ */
+.subCategoryContainer {
+  padding: 0 !important;
+}
+.subCategoryName {
+  display: flex;
+  flex-direction: column;
+}
+.subCategoryName a {
+  display: block;
+  width: 100%;
+  text-decoration: none;
+  color: #222;
+  padding: 15px;
+}
+.subCategoryName a:not(:last-child) {
+  border-bottom: 1px solid #ccc;
+}
+
+/* ///////////////////////////////////////////////////////// */
+/* CATEGORY FILTERED PPAGE */
+.categoryPageCont{
+  width: 100%;
+  min-height: 100vh;
+}
+.topText {
+  padding: 10px 76px;
+  display: flex !important;
+  align-items: center;    
+  color: #222222 !important;
+  border-bottom: 1px solid #ccc;
+}
+.topText a, .topText div {
+  text-decoration: none;
+  font-size: 18px !important;
+  color: #222222 !important;
+}
+
+.container{
+  min-height: 90vh;
+  padding: 50px 76px;
+}
+.heading h2{
+  color: #222;
+  font-size: 2rem;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+  position: relative;
+}
+.heading h2::after{
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 50px;
+  height: 3px;
+  background-color: var(--color-brown-light);
+  border-radius: 10px;
+}
+.itemContainerr{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+.itemContainerr .viewBookContForBook{
+  width: 20%;
+}
+.emptyBooks{
+  width: 100%;
+  min-height: 50vh;
+  text-align: center;
+}
+.emptyBooks img{
+  height: 25vh;
+  margin-bottom: 2rem;
+}
+.emptyBooks h3{
+  font-size: 20px;
+  color: var(--color-brown);
+  margin-bottom: 20px;
+}
+.emptyBooks a{
+  text-decoration: none;
+  color: var(--color-brown);
+}
+.emptyBooks a:hover{
+  color: var(--color-brown-light);
+}
+
+
+/* ///////////////////////////////////////////////////////// */
+/* ================= BREAK POINTS ==================== */
+@media screen and (max-width: 480px) {
+  .categoriesContainer { padding: 70px 0 25px 0; }
+  .categoriesContainer h4 { padding: 0 25px; font-size: 17px; position: relative; }
+  .categoriesContainer h4::before { width: 40px; height: 2px; bottom: -8px; left: 25px; }
+
+  .categoryName{ padding: 0 20px !important; }
+  .categoryName div a { font-weight: 400; font-size: 14px; }
+
+  .topText { padding: 30px 25px 10px 25px; }
+  .topText a, .topText div{ font-size: 12px !important; }
+  .heading h2{ font-size: 1.2rem;}
+  .heading h2::after{ width: 50px; height: 2px; left: 20px; }
+  .container{ padding: 20px 20px 20px 10px; }
+  .itemContainerr{ margin-top: 30px; }
+  .itemContainerr .viewBookContForBook{ width: 50%; margin-bottom: 30px; }
+}

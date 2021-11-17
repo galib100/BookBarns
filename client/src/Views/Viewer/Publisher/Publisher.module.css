@@ -1,0 +1,140 @@
+.publisherContainer{ width: 100%; min-height: 100vh; }
+.publisherContainer h1{
+    padding-top: 40px;
+    color: var(--color-brown);
+    font-size: 2.5rem;
+    text-align: center;
+    position: relative;
+}
+.publisherContainer h1::after{
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 3px;
+    background: var(--color-brown);
+}
+.publishers{
+    width: 70%;
+    min-height: 80vh;
+    padding: 40px 0;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* Publisher - card */
+.publisher{
+    width: 20%;
+    height: fit-content;
+    margin-bottom: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.publisher__image{
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+.publisher__image img{ width: 90%; }
+.publisher__info{ margin-top: 20px; text-align: center; text-decoration: none; color: #222; }
+.publisher__info:hover{ text-decoration: none; color: gray; }
+.publisher__info h6{ font-size: 16px; line-height: 16px; }
+.publisher__info p{ font-size: 12px; line-height: 12px; }
+
+
+/* Filter books according to publisher */
+.filterBooksAccordingToPublisherCont{
+    width: 100%;
+    min-height: 100vh;
+}
+.topText {
+    padding: 10px 76px;
+    display: flex !important;
+    align-items: center;    
+    color: #222222 !important;
+    border-bottom: 1px solid #ccc;
+  }
+.topText a, .topText div {
+    text-decoration: none;
+    font-size: 18px !important;
+    color: #222222 !important;
+}
+
+.container{
+    min-height: 90vh;
+    padding: 50px 76px;
+}
+.heading h2{
+    color: #222;
+    font-size: 2rem;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+    position: relative;
+}
+.heading h2::after{
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background-color: var(--color-brown-light);
+    border-radius: 10px;
+}
+.itemContainerr{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+.itemContainerr .viewBookContForBook{
+    width: 20%;
+}
+.emptyBooks{
+    width: 100%;
+    min-height: 50vh;
+    text-align: center;
+}
+.emptyBooks img{
+    height: 25vh;
+    margin-bottom: 2rem;
+}
+.emptyBooks h3{
+    font-size: 20px;
+    color: var(--color-brown);
+    margin-bottom: 20px;
+}
+.emptyBooks a{
+    text-decoration: none;
+    color: var(--color-brown);
+}
+.emptyBooks a:hover{
+    color: var(--color-brown-light);
+}
+
+@media screen and (max-width: 480px) {
+    .publisherContainer h1{ padding-top: 65px; font-size: 1.3rem; }
+    .publisherContainer h1::after{ width: 60px; height: 2px; }
+    .publishers{ width: 100%; padding: 25px; }
+    .publisher{ width: 31%; margin-bottom: 40px; }
+    .publisher__image { width: 60px; height: 60px; box-shadow: 0 0 5px rgba(0,0,0,0.1); }
+    .publisher__info h6{ font-size: 14px; font-weight: normal; }
+    .publisher__info p{ font-size: 10px; line-height: 10px; }
+
+    .topText { padding: 30px 25px 10px 25px; }
+    .topText a, .topText div{ font-size: 12px !important; }
+    .heading h2{ font-size: 1.2rem;}
+    .heading h2::after{ width: 30px; height: 2px; }
+    .container{ padding: 20px 20px 20px 10px; }
+    .itemContainerr{ margin-top: 30px; }
+    .itemContainerr .viewBookContForBook{ width: 50%; margin-bottom: 30px; }
+}

@@ -1,0 +1,33 @@
+.BlogDetailPageContainer{
+    width: 75%;
+    min-height: 70vh;
+    margin: auto;
+}
+
+.imageBlock{
+    width: 100%;
+    height: 60vh;
+    background: #ccc;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+.imageBlock img{
+    width: 100%;
+    max-height: 60vh;
+}
+.headingBlock{
+    margin-bottom: 2rem;
+}
+.contentBlock{
+    padding: 20px 0;
+    margin-bottom: 4rem;
+}
+
+@media screen and (max-width: 480px) {
+    .BlogDetailPageContainer{ width: 100%; min-height: 90vh; padding: 50px 20px; }
+    .imageBlock{ height: 33vh; margin-bottom: 0; }
+    .imageBlock img{ width: 100%; max-height: 33vh; }
+    .headingBlock{ margin-bottom: 10px; margin-top: 10px; }
+    .headingBlock h1{ font-size: 20px; }
+    .contentBlock{ padding: 20px 0; margin-bottom: 1rem; }
+}

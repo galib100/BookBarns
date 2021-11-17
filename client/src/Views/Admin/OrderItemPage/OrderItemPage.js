@@ -9,14 +9,10 @@ import { connect } from "react-redux";
 
 const OrderItemPage = (props) => {
   const { getOrderItem } = props;
-  let id = parseInt(props.match.params.id);
-  let flag = false;
-  useEffect(() => {
-    flag = getOrderItem(id);
-    if (!flag) {
-      return <Redirect to="/admin/orders" />;
-    }
-  }, [id]);
+  let id = props.match.params.id;
+
+  getOrderItem(id);
+
   return (
     <div style={{ background: "#F5F5F5" }}>
       <NavbarAdmin />

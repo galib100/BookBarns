@@ -4,16 +4,34 @@ import { Form as BootstrapForm, Row, Col, InputGroup } from "react-bootstrap";
 import * as Yup from "yup";
 import swal from "sweetalert";
 import styles from "./AddBookForm.module.css";
-import categoryList from "../data/categoryList";
 import { ShadowCard } from "../../shared/ShadowCard";
-import data from "../data/books";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
+import { BASE_URL } from "../../../Constants/URL";
+import { addBook, editBook } from "../../../Actions/Admin/BooksActions";
+import MDEditor from "@uiw/react-md-editor";
 
-const AddBookForm = ({ edit, data }) => {
+const AddBookForm = ({
+  data,
+  edit,
+  addBook,
+  editBook,
+  publishers,
+  categories,
+  authors,
+  books,
+}) => {
   const [selectedFile, setSelectedFile] = useState();
   const [preview, setPreview] = useState();
+  const [subcat, setSubcat] = useState(["First Select a Category"]);
+
   useEffect(() => {
+    const cat = () => {
+      if (data.category) {
+        subcatHandeler(data.category);
+      }
+    };
+    cat();
     if (!selectedFile) {
       setPreview(undefined);
       return;
@@ -28,6 +46,10 @@ const AddBookForm = ({ edit, data }) => {
       setSelectedFile(undefined);
       return;
     }
+    if (e.target.files[0].size > 2000000) {
+      swal("File size is too big", "", "error");
+      return;
+    }
     setSelectedFile(e.target.files[0]);
   };
 
@@ -37,13 +59,44 @@ const AddBookForm = ({ edit, data }) => {
   };
 
   const onSubmitHandeler = (values) => {
-    //Book Form SUBMIT ACTION CALL
-    if (data) {
-      swal("Success!", "Book Modified", "success");
-    } else {
-      swal("Success!", "Book Added", "success");
+    let skuCheck = books.filter(
+      (item) => item.sku === values.sku && data._id !== item._id
+    ).length;
+
+    if (skuCheck > 0) {
+      swal("Book with same SKU exists", "Change the SKU", "error");
+      return;
     }
-    console.log(values);
+    //Book Form SUBMIT ACTION CALL
+    if (data._id) {
+      let flag = false;
+      flag = editBook(values, selectedFile, data._id);
+      if (flag) {
+        swal("Success!", "Book Modified", "success");
+      } else {
+        swal("Something Went Wrong!", "Book Modification failed", "error");
+      }
+    } else {
+      let flag = false;
+      flag = addBook(values, selectedFile);
+      if (flag) {
+        swal("Success!", "Book Added", "success");
+      } else {
+        swal("Something Went Wrong!", "Book Add failed", "error");
+      }
+    }
+
+    //console.log(selectedFile);
+  };
+
+  const subcatHandeler = (id) => {
+    if (id === "select") {
+      setSubcat(["First Select a Category"]);
+    } else {
+      setSubcat(
+        categories.filter((item) => item.category === id)[0].subcategory
+      );
+    }
   };
 
   let initVals = {
@@ -51,9 +104,11 @@ const AddBookForm = ({ edit, data }) => {
     author: "",
     quantity: 0,
     category: "",
+    subcategory: "",
     genre: "",
     price: 0,
     discount: 0,
+    type: "percantage",
     page: 0,
     publisher: "",
     edition: 1,
@@ -61,29 +116,36 @@ const AddBookForm = ({ edit, data }) => {
     description: "",
     image: "",
     isbn: "",
+    sku: "",
     quality: "",
+    tags: "",
   };
 
-  if (data) {
+  if (data && edit !== -1) {
     if (!data) {
-      return <Redirect to="/admin/" />;
+      return <Redirect to="/admin/add" />;
     }
+
     initVals = {
       title: data.title,
       author: data.author,
-      quantity: data.quantity,
+      quantity: parseInt(data.quantity),
       category: data.category,
+      subcategory: data.subcategory,
       genre: data.genre,
-      price: data.price,
-      discount: data.discount,
-      page: data.pages,
+      price: parseInt(data.price),
+      discount: parseInt(data.discount),
+      type: data.discounttype,
+      page: parseInt(data.pages),
       publisher: data.publisher,
-      edition: data.edition,
-      year: data.year,
+      edition: parseInt(data.edition),
+      year: parseInt(data.year),
       description: data.description,
       image: "",
       isbn: data.isbn,
+      sku: data.sku,
       quality: data.quality,
+      tags: data.tags.join(),
     };
   }
 
@@ -91,11 +153,7 @@ const AddBookForm = ({ edit, data }) => {
     title: Yup.string().required("Title is required!"),
     author: Yup.string().required("Author Name is required!"),
     quantity: Yup.number()
-      .test(
-        "Is positive?",
-        "Quantity must be greater than 0",
-        (value) => value > 0
-      )
+      .test("Is positive?", "Quantity >= 0", (value) => value >= 0)
       .required("Quantity is required!"),
     category: Yup.string()
       .test(
@@ -103,8 +161,16 @@ const AddBookForm = ({ edit, data }) => {
         "Please select a category",
         (value) => value !== "select"
       )
-      .required("Quantity is required!"),
-    genre: Yup.string().required("Genre is required!"),
+      .required("Category is required!"),
+    type: Yup.string().required("Discount Type is required!"),
+    subcategory: Yup.string()
+      .test(
+        "Is selected?",
+        "Please select a sub category",
+        (value) => value !== "select"
+      )
+      .required("Sub Category is required!"),
+
     price: Yup.number()
       .test(
         "Is positive?",
@@ -116,7 +182,7 @@ const AddBookForm = ({ edit, data }) => {
       .test(
         "Is positive?",
         "Discount must be between 0 to 100",
-        (value) => value >= 0 && value <= 100
+        (value) => value >= 0
       )
       .required("Discount is required!"),
     page: Yup.string()
@@ -139,17 +205,19 @@ const AddBookForm = ({ edit, data }) => {
       )
       .required("Year is required!"),
     image: Yup.mixed().notRequired("Image is required!"),
-    isbn: Yup.string().required("ISBN number is required!"),
+    sku: Yup.string().required("SKU code is required!"),
     quality: Yup.string().required("Quality is required!"),
+    tags: Yup.string().required("Tag is required!"),
   });
   return (
     <ShadowCard title="Basic information">
       <Formik
+        enableReinitialize
         initialValues={initVals}
         validationSchema={SignupSchema}
         onSubmit={(values) => onSubmitHandeler(values)}
       >
-        {({ errors, touched }) => (
+        {({ errors, touched, handleChange, values, setFieldValue }) => (
           <Form
             className={`py-2 pr-3 pr-md-0 ${styles.form}`}
             id="signup__form"
@@ -175,7 +243,7 @@ const AddBookForm = ({ edit, data }) => {
               />
             </InputGroup>
             <Row>
-              <Col md={6}>
+              {/* <Col md={4}>
                 <InputGroup className="mb-3 d-flex flex-column">
                   <div className="d-flex justify-content-between align-items-center">
                     <label htmlFor="author" className="d-block">
@@ -195,8 +263,36 @@ const AddBookForm = ({ edit, data }) => {
                     isInvalid={errors.author && touched.author}
                   />
                 </InputGroup>
+              </Col> */}
+              <Col md={4}>
+                <InputGroup className="mb-3 d-flex flex-column">
+                  <div className="d-flex justify-content-between align-items-center">
+                    <label htmlFor="author" className="d-block">
+                      Author Name
+                    </label>
+                    {errors.author && touched.author ? (
+                      <small className="text-danger">{errors.author}</small>
+                    ) : null}
+                  </div>
+                  <Field
+                    as="select"
+                    placeholder="author Name"
+                    name="author"
+                    className={`${styles.input} form-control w-100`}
+                    onChange={(e) => {
+                      handleChange(e);
+                    }}
+                  >
+                    <option value="select">Select Author</option>
+                    {authors.map((item) => (
+                      <option key={item._id} value={item.author}>
+                        {item.author}
+                      </option>
+                    ))}
+                  </Field>
+                </InputGroup>
               </Col>
-              <Col md={6}>
+              <Col md={4}>
                 <InputGroup className="mb-3 d-flex flex-column">
                   <div className="d-flex justify-content-between align-items-center">
                     <label htmlFor="quantity" className="d-block">
@@ -217,6 +313,27 @@ const AddBookForm = ({ edit, data }) => {
                   />
                 </InputGroup>
               </Col>
+              <Col md={4}>
+                <InputGroup className="mb-3 d-flex flex-column">
+                  <div className="d-flex justify-content-between align-items-center">
+                    <label htmlFor="tags" className="d-block">
+                      Tags
+                    </label>
+                    {errors.tags && touched.tags ? (
+                      <small className="text-danger">{errors.tags}</small>
+                    ) : null}
+                  </div>
+                  <Field
+                    as={BootstrapForm.Control}
+                    placeholder="Tag list separeted with comma"
+                    name="tags"
+                    isValid={!errors.tags && touched.tags}
+                    type="text"
+                    className={`${styles.input} w-100`}
+                    isInvalid={errors.tags && touched.tags}
+                  />
+                </InputGroup>
+              </Col>
             </Row>
             <Row>
               <Col md={6}>
@@ -234,17 +351,48 @@ const AddBookForm = ({ edit, data }) => {
                     placeholder="category Name"
                     name="category"
                     className={`${styles.input} form-control w-100`}
+                    onChange={(e) => {
+                      subcatHandeler(e.target.value);
+                      handleChange(e);
+                    }}
                   >
                     <option value="select">Select Category</option>
-                    {categoryList.map((item) => (
-                      <option key={item.id} value={item.name}>
-                        {item.name}
+                    {categories.map((item) => (
+                      <option key={item._id} value={item.category}>
+                        {item.category}
                       </option>
                     ))}
                   </Field>
                 </InputGroup>
               </Col>
               <Col md={6}>
+                <InputGroup className="mb-3 d-flex flex-column">
+                  <div className="d-flex justify-content-between align-items-center">
+                    <label htmlFor="subcategory" className="d-block">
+                      Sub Category
+                    </label>
+                    {errors.subcategory && touched.subcategory ? (
+                      <small className="text-danger">
+                        {errors.subcategory}
+                      </small>
+                    ) : null}
+                  </div>
+                  <Field
+                    as="select"
+                    placeholder="Sub Category Name"
+                    name="subcategory"
+                    className={`${styles.input} form-control w-100`}
+                  >
+                    <option value="select">Select Subcategory</option>
+                    {subcat.map((item, i) => (
+                      <option key={i} value={item}>
+                        {item}
+                      </option>
+                    ))}
+                  </Field>
+                </InputGroup>
+              </Col>
+              {/* <Col md={4}>
                 <InputGroup className="mb-3 d-flex flex-column">
                   <div className="d-flex justify-content-between align-items-center">
                     <label htmlFor="genre" className="d-block">
@@ -264,10 +412,10 @@ const AddBookForm = ({ edit, data }) => {
                     isInvalid={errors.genre && touched.genre}
                   />
                 </InputGroup>
-              </Col>
+              </Col> */}
             </Row>
             <Row>
-              <Col md={4} xs={6}>
+              <Col md={3} xs={6}>
                 <InputGroup className="mb-3 d-flex flex-column">
                   <div className="d-flex justify-content-between align-items-center">
                     <label htmlFor="price" className="d-block">
@@ -288,11 +436,11 @@ const AddBookForm = ({ edit, data }) => {
                   />
                 </InputGroup>
               </Col>
-              <Col md={4} xs={6}>
+              <Col md={3} xs={6}>
                 <InputGroup className="mb-3 d-flex flex-column">
                   <div className="d-flex justify-content-between align-items-center">
                     <label htmlFor="discount" className="d-block">
-                      Discount <small>(in percentage)</small>
+                      Discount <small>(Amount)</small>
                     </label>
                     {errors.discount && touched.discount ? (
                       <small className="text-danger">{errors.discount}</small>
@@ -309,7 +457,28 @@ const AddBookForm = ({ edit, data }) => {
                   />
                 </InputGroup>
               </Col>
-              <Col md={4} xs={6}>
+              <Col md={3} xs={6}>
+                <InputGroup className="mb-3 d-flex flex-column">
+                  <div className="d-flex justify-content-between align-items-center">
+                    <label htmlFor="type" className="d-block">
+                      Type of Discount
+                    </label>
+                    {errors.type && touched.type ? (
+                      <small className="text-danger">{errors.type}</small>
+                    ) : null}
+                  </div>
+                  <Field
+                    as="select"
+                    placeholder="Type of discount"
+                    name="type"
+                    className={`${styles.input} form-control w-100`}
+                  >
+                    <option value="percantage">Percantage</option>
+                    <option value="flat">Flat</option>
+                  </Field>
+                </InputGroup>
+              </Col>
+              <Col md={3} xs={6}>
                 <InputGroup className="mb-3 d-flex flex-column">
                   <div className="d-flex justify-content-between align-items-center">
                     <label htmlFor="page" className="d-block">
@@ -344,14 +513,18 @@ const AddBookForm = ({ edit, data }) => {
                     ) : null}
                   </div>
                   <Field
-                    as={BootstrapForm.Control}
-                    placeholder="Publisher"
+                    as="select"
+                    placeholder="publisher Name"
                     name="publisher"
-                    isValid={!errors.publisher && touched.publisher}
-                    type="text"
-                    className={`${styles.input} w-100`}
-                    isInvalid={errors.publisher && touched.publisher}
-                  />
+                    className={`${styles.input} form-control w-100`}
+                  >
+                    <option value="select">Select publisher</option>
+                    {publishers.map((item) => (
+                      <option key={item._id} value={item.name}>
+                        {item.name}
+                      </option>
+                    ))}
+                  </Field>
                 </InputGroup>
               </Col>
               <Col md={4} xs={6}>
@@ -399,7 +572,7 @@ const AddBookForm = ({ edit, data }) => {
             </Row>
 
             <Row>
-              <Col md={6}>
+              <Col md={4}>
                 <InputGroup className="mb-3 d-flex flex-column">
                   <div className="d-flex justify-content-between align-items-center">
                     <label htmlFor="isbn" className="d-block">
@@ -420,7 +593,28 @@ const AddBookForm = ({ edit, data }) => {
                   />
                 </InputGroup>
               </Col>
-              <Col md={6}>
+              <Col md={4}>
+                <InputGroup className="mb-3 d-flex flex-column">
+                  <div className="d-flex justify-content-between align-items-center">
+                    <label htmlFor="sku" className="d-block">
+                      SKU
+                    </label>
+                    {errors.sku && touched.sku ? (
+                      <small className="text-danger">{errors.sku}</small>
+                    ) : null}
+                  </div>
+                  <Field
+                    as={BootstrapForm.Control}
+                    placeholder="SKU number"
+                    name="sku"
+                    isValid={!errors.sku && touched.sku}
+                    type="text"
+                    className={`${styles.input} w-100`}
+                    isInvalid={errors.sku && touched.sku}
+                  />
+                </InputGroup>
+              </Col>
+              <Col md={4}>
                 <InputGroup className="mb-3 d-flex flex-column">
                   <div className="d-flex justify-content-between align-items-center">
                     <label htmlFor="quality" className="d-block">
@@ -443,7 +637,7 @@ const AddBookForm = ({ edit, data }) => {
               </Col>
             </Row>
             <InputGroup className="mb-3 d-flex flex-column">
-              <div className="d-flex justify-content-between align-items-center">
+              {/* <div className="d-flex justify-content-between align-items-center">
                 <label htmlFor="description" className="d-block">
                   Short Description
                 </label>
@@ -457,6 +651,14 @@ const AddBookForm = ({ edit, data }) => {
                 placeholder="Short Description"
                 style={{ minHeight: "200px" }}
                 className={`${styles.input} form-control w-100`}
+              /> */}
+              <MDEditor
+                value={values.description}
+                onChange={(e) => {
+                  console.log(e);
+                  setFieldValue("description", e);
+                }}
+                name="description"
               />
             </InputGroup>
 
@@ -491,9 +693,9 @@ const AddBookForm = ({ edit, data }) => {
                       style={{ maxWidth: "400px", maxHeight: "300px" }}
                     />
                   )}
-                  {data && !selectedFile && (
+                  {data.image && !selectedFile && (
                     <img
-                      src={data.image}
+                      src={`${BASE_URL}/${data.image}`}
                       style={{ maxWidth: "400px", maxHeight: "300px" }}
                     />
                   )}
@@ -525,6 +727,11 @@ const AddBookForm = ({ edit, data }) => {
 
 const mapStateToProps = (state) => ({
   data: state.admin_book_page.selected_book,
+  loading: state.admin_book_page.loading,
+  publishers: state.auth_publisher.publishers,
+  categories: state.auth_category.categories,
+  authors: state.auth_author.authors,
+  books: state.admin_book_page.books,
 });
 
-export default connect(mapStateToProps, null)(AddBookForm);
+export default connect(mapStateToProps, { addBook, editBook })(AddBookForm);

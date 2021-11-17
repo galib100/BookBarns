@@ -1,44 +1,67 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { Modal } from "react-bootstrap";
 import { Formik, Form, Field } from "formik";
 import { Form as BootstrapForm, InputGroup } from "react-bootstrap";
 import * as Yup from "yup";
 import swal from "sweetalert";
+import { setUser, clearUser } from "../../../Actions/Viewer/userAction";
 import { loginSignupModalToggle } from "../../../Actions/Viewer/LandingPageActions";
+import axios from "axios";
+import { BASE_URL } from "../../../Constants/URL";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+
+// STYLES
 import styles from "./LoginModal.module.css";
-import { Link } from "react-router-dom";
 
-const LoginModal = ({ loginSignupModalToggle, open }) => {
-  const handleClose = () => {
-    loginSignupModalToggle("");
-  };
 
-  const signupModal = () => {
-    loginSignupModalToggle("signup");
-  };
+const LoginModal = ({ loginSignupModalToggle, open, setUser }) => {
+  const [loading, setLoading] = useState(false);
+  const [watch, setWatch] = useState(false);
+  const [error, setError] = useState("");
+
+  // Control Modal
+  const handleClose = () => { loginSignupModalToggle(""); };
+  const signupModal = () => { loginSignupModalToggle("signup"); };
+
+   // Set to local storage (temporary)
+   const saveToLocalStorage = (user, token) => {
+    localStorage.setItem('viewer', JSON.stringify(user));
+    localStorage.setItem('viewer_token', token);
+  }
 
   const onSubmitHandeler = (values) => {
-    //Blog ACTION CALL
-    swal("Login Success!", "", "success");
-    console.log(values);
+    setLoading(true);
+    // API CALL
+    axios
+      .post(`${BASE_URL}/api/login`, values)
+      .then((res) => {
+        setUser(res.data) // save to redux
+        saveToLocalStorage(res.data.currentUser, res.data.token); // save to local storage
+        swal("Login Success!", "", "success"); // popup success message
+        setLoading(false);
+        handleClose();
+      })
+      .catch(() => {
+        setError("Phone number or password is wrong.");
+        setLoading(false);
+      });
   };
 
-  const initVals = {
-    phone: "",
-    password: "",
-  };
-
+  // MANAGING YUP SCHEMA
+  const initVals = { phone: "", password: "" };
   const SignupSchema = Yup.object().shape({
     phone: Yup.string().required("Phone number is required!"),
     password: Yup.string().required("Password is required!"),
   });
+
   return (
     <Modal
       onHide={() => handleClose()}
       show={open === "login" ? true : false}
       backdrop="static"
       keyboard={false}
+      className={styles.modal}
     >
       <Modal.Header className={`${styles.heading}`} closeButton>
         <Modal.Title>Sign In</Modal.Title>
@@ -75,7 +98,7 @@ const LoginModal = ({ loginSignupModalToggle, open }) => {
                 />
               </InputGroup>
 
-              <InputGroup className="mb-3 d-flex flex-column">
+              <InputGroup className={`${styles.inputGroup} mb-3 d-flex flex-column`}>
                 <div className="d-flex justify-content-between align-items-center">
                   <label htmlFor="password" className="d-block">
                     Password
@@ -89,13 +112,20 @@ const LoginModal = ({ loginSignupModalToggle, open }) => {
                   placeholder="Password"
                   name="password"
                   isValid={!errors.password && touched.password}
-                  type="password"
+                  type={watch ? "text" : "password"}
                   className={`${styles.input} w-100`}
                   isInvalid={errors.password && touched.password}
                 />
+                <span className={styles.watchpass} onClick={() => setWatch(!watch)}>
+                  {
+                    watch 
+                    ? < AiOutlineEye />
+                    : < AiOutlineEyeInvisible />
+                  }
+                </span>
               </InputGroup>
 
-              <div className="text-center py-4">
+              {/* <div className="text-center py-4">
                 <Link
                   to="/"
                   style={{
@@ -105,32 +135,19 @@ const LoginModal = ({ loginSignupModalToggle, open }) => {
                 >
                   Forget Password
                 </Link>
-              </div>
-
-              <button
-                className={`primary__btn btn-block px-5 py-2 mt-4 w-100 ${styles.submit}`}
-                type="submit"
-              >
-                LOGIN
-              </button>
+              </div> */}
+              <small style={{color: "red"}}>{error}</small>
+              {
+                !loading
+                ? <button className={styles.submit} type="submit">Sign in</button>
+                : <div className={styles.submit}>Loading ...</div>
+              }
             </Form>
           )}
         </Formik>
-        <div className="text-center lead">
-          <span>
-            Need an account?{" "}
-            <span
-              style={{
-                color: "#4E5BFF",
-                cursor: "pointer",
-                fontWeight: "bold",
-              }}
-              onClick={() => signupModal()}
-            >
-              Sign up
-            </span>
-          </span>
-        </div>
+        <p className={styles.notHaveAccoun}>Need an account?{" "}
+          <span onClick={() => signupModal()}>Sign up</span>
+        </p>
       </Modal.Body>
     </Modal>
   );
@@ -140,4 +157,12 @@ const mapStateToProps = (state) => ({
   open: state.pages.login_signup_modal,
 });
 
-export default connect(mapStateToProps, { loginSignupModalToggle })(LoginModal);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setUser: (data) => dispatch(setUser(data)),
+    clearUser: (data) => dispatch(clearUser(data)),
+    loginSignupModalToggle: (type) => dispatch(loginSignupModalToggle(type)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginModal);

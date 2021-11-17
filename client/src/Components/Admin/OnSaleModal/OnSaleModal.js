@@ -4,9 +4,8 @@ import { Modal } from "react-bootstrap";
 import swal from "sweetalert";
 import { onSaleModalToggleAction } from "../../../Actions/Admin/OnSaleActions";
 import styles from "./OnSaleModal.module.css";
-import data from "../data/bestSellerBook";
 
-const OnSaleModal = ({ onSaleModalToggleAction, open, book }) => {
+const OnSaleModal = ({ onSaleModalToggleAction, open, book, data }) => {
   const [selectedBook, setSelectedBook] = useState(book ? book : {});
   const [search, setSearch] = useState("");
   const [list, setList] = useState([]);
@@ -43,7 +42,7 @@ const OnSaleModal = ({ onSaleModalToggleAction, open, book }) => {
   };
 
   const selectItem = (id) => {
-    setSelectedBook(...data.filter((item) => item.id === id));
+    setSelectedBook(...data.filter((item) => item._id === id));
     setList([]);
   };
 
@@ -69,8 +68,8 @@ const OnSaleModal = ({ onSaleModalToggleAction, open, book }) => {
           />
           <div className="list-group">
             {list.map((item) => (
-              <div key={item.id} className={`${styles.item} list-group-item`}>
-                <span onClick={() => selectItem(item.id)}>{item.title}</span>
+              <div key={item._id} className={`${styles.item} list-group-item`}>
+                <span onClick={() => selectItem(item._id)}>{item.title}</span>
               </div>
             ))}
           </div>
@@ -109,8 +108,9 @@ const OnSaleModal = ({ onSaleModalToggleAction, open, book }) => {
 };
 
 const mapStateToProps = (state) => ({
-  open: state.admin_page.on_sale_modal,
-  book: state.admin_page.on_sale_book,
+  open: state.admin_book_page.on_sale_modal,
+  book: state.admin_book_page.on_sale_book,
+  data: state.admin_book_page.books,
 });
 
 export default connect(mapStateToProps, { onSaleModalToggleAction })(

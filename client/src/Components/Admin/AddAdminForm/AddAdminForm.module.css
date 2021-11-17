@@ -9,3 +9,10 @@
     font-size: 12px;
   }
 }
+
+.eyeIcon {
+  position: absolute;
+  right: 5px;
+  top: 58%;
+  cursor: pointer;
+}
