@@ -27,12 +27,12 @@ const Footer = () => {
               <div>Road-01, Padma Residential Area</div>
               <div>Rajshahi, Bangladesh</div>
             </h6>
-            <p className="pt-2">connect.obosorbooks@gmail.com</p>
+            <p className="pt-2">connect.BookBarnsbooks@gmail.com</p>
             <p className="pt-2">+880 1624678366</p>
 
             <div className={Style.socialLinks}>
-              <div><a href="https://www.facebook.com/Obosor.Books/" target="_blank"><ImFacebook /></a></div>
-              <div><a href="https://www.instagram.com/obosor.books/" target="_blank"><FiInstagram /></a></div>
+              <div><a href="https://www.facebook.com/BookBarns.Books/" target="_blank"><ImFacebook /></a></div>
+              <div><a href="https://www.instagram.com/BookBarns.books/" target="_blank"><FiInstagram /></a></div>
             </div>
           </div>
 
@@ -73,7 +73,7 @@ const Footer = () => {
       
       {/* lastline */}
       <hr />
-      <div className={Style.lastLine}> <div>&copy;</div> 2021 Obosor. All right reserved </div>
+      <div className={Style.lastLine}> <div>&copy;</div> 2021 BookBarns. All right reserved </div>
       <hr className={Style.lastHr} />
     </div>
   );

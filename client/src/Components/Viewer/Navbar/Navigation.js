@@ -125,12 +125,13 @@ function Navigation({
             <Navbar.Brand href="#home" className={`${Style.brand}`}>
               <Link to="/">
                 <img
-                  alt="অবসর"
+                  alt="BookBarns"
                   src={brandLogo}
                   width="75"
                   height="75"
                   className="pb-2"
                 />
+                {/* <span>BookBarns</s> */}
               </Link>
             </Navbar.Brand>
           </Col>

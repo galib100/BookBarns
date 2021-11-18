@@ -5,7 +5,7 @@ import { Footer } from "../Footer";
 
 // STYLES & ASSERS
 import Style from "./About.module.css";
-import oboshorlogo from "../../../Assets/Viewer/About/Obosor.jpg";
+import oboshorlogo from "../../../Assets/Viewer/About/bookBurns.jpg";
 import offer from "../../../Assets/Viewer/About/offer.png";
 import cashOnDeliver from "../../../Assets/Viewer/About/cash-on-delivery.png";
 import group from "../../../Assets/Viewer/About/Group 843.png";
@@ -33,20 +33,20 @@ const About = () => {
           <div className={Style.story__text}>
             <h3>Our Story</h3>
             <p>
-              Obosor is a community-based book shop founded by a group of
+            BookBarns is a community-based book shop founded by a group of
               enthusiasts from RUET, which won the Bangabandhu Innovation Grant
               2019.
             </p>
             <p>
-              Obosor started its journey from the green campus of RUET in 2018.
-              Since its establishment, Obosor has been trying to deliver
-              happiness packed in books. With the progression of time, Obosor
+              BookBarns started its journey from the green campus of RUET in 2018.
+              Since its establishment, BookBarns has been trying to deliver
+              happiness packed in books. With the progression of time, BookBarns
               has expanded its service all over the country and has already
               served thousands of book lovers.
             </p>
             <p>
               Through creating university and campus-based student community
-              networks, Obosor aims to promote reading and create readers who
+              networks, BookBarns aims to promote reading and create readers who
               will lead Bangladesh in the future with their knowledge and
               creativity.
             </p>
@@ -144,9 +144,9 @@ const About = () => {
               <div className={Style.apolicy__text}>
                 <h4>Legal</h4>
                 <p>
-                  Obosor operates abiding by all the law and regulations for
+                  BookBarns operates abiding by all the law and regulations for
                   E-commerce businesses imposed by Ministry of Commerce,
-                  Bangladesh. Obosor team doesn’t wish to sell or promote
+                  Bangladesh. BookBarns team doesn’t wish to sell or promote
                   anything that is not supported by the government law of
                   Bangladesh
                 </p>
@@ -161,9 +161,9 @@ const About = () => {
               <div className={Style.apolicy__text}>
                 <h4>Refund Policy</h4>
                 <p>
-                  Obosor operates abiding by all the law and regulations for
+                  BookBarns operates abiding by all the law and regulations for
                   E-commerce businesses imposed by Ministry of Commerce,
-                  Bangladesh. Obosor team doesn’t wish to sell or promote
+                  Bangladesh. BookBarns team doesn’t wish to sell or promote
                   anything that is not supported by the government law of
                   Bangladesh
                 </p>
@@ -178,7 +178,7 @@ const About = () => {
               <div className={Style.apolicy__text}>
                 <h4>Privacy</h4>
                 <p>
-                  Obosor doesn’t share your personal data with any third party,
+                  BookBarns doesn’t share your personal data with any third party,
                   your data is only used to fulfill your order.
                 </p>
               </div>
@@ -193,7 +193,7 @@ const About = () => {
                 <h4>Happy Return</h4>
                 <p>
                   You can return your order if there’s anything wrong or
-                  products gets damaged for any unexpected circumstances. Obosor
+                  products gets damaged for any unexpected circumstances. BookBarns
                   doesn’t charge customers in such cases
                 </p>
               </div>

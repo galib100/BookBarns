@@ -235,11 +235,11 @@ const ContactUs = () => {
                 </div>
               </div>
               <a
-                href="https://www.facebook.com/Obosor.Books/"
+                href="https://www.facebook.com/BookBarns.Books/"
                 target="_blank"
                 className={Style.text}
               >
-                <h4>facebook.com/Obosor.Books</h4>
+                <h4>facebook.com/BookBarns.Books</h4>
                 <p>Facebook</p>
               </a>
             </div>
@@ -251,7 +251,7 @@ const ContactUs = () => {
                 </div>
               </div>
               <div className={Style.text}>
-                <h4>connect.obosorbooks@gmail.com</h4>
+                <h4>connect.BookBarnsbooks@gmail.com</h4>
                 <p>Gmail</p>
               </div>
             </div>
@@ -263,11 +263,11 @@ const ContactUs = () => {
                 </div>
               </div>
               <a
-                href="https://www.instagram.com/obosor.books/"
+                href="https://www.instagram.com/BookBarns.books/"
                 target="_blank"
                 className={Style.text}
               >
-                <h4>obosor.books</h4>
+                <h4>BookBarns.books</h4>
                 <p>Instagram</p>
               </a>
             </div>
