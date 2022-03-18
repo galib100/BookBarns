@@ -37,15 +37,15 @@ const LandingPage = ({ categoriesOfBooks, saveBooksCategories }) => {
   return (
     <>
       <Helmet>
-        <title>Obosor</title>
-        <meta name="title" content="Obosor " />
+        <title>Book barns </title>
+        <meta name="title" content="Book barns  " />
         <meta
           name="description"
-          content="Obosor is a community-based book shop founded by a group of enthusiasts from RUET, which won the Bangabandhu Innovation Grant 2019."
+          content="Book barns  is a community-based book shop founded by a group of enthusiasts from RUET, which won the Bangabandhu Innovation Grant 2019."
         />
         <meta
           name="keywords"
-          content="obosor, book shop, Bangabandhu Innovation Grant, obosor ruet, obosor shop, online book shop, book market, obosor books, best books online "
+          content="Book barns , book shop, Bangabandhu Innovation Grant, Book barns  ruet, Book barns  shop, online book shop, book market, Book barns  books, best books online "
         />
         <meta name="robots" content="index, follow" />
       </Helmet>
