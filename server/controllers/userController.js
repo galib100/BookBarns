@@ -46,6 +46,36 @@ const postSignupController = (req, res) => {
 }
 
 
+//Post_login Controller
+const postLoginController = (req,res)=>{
+    let password = req.body.password;
+    let email = req.body.email;
+   
+    User.findOne({email})
+    .then(user =>{
+        if(user){
+            bcrypt.compare(password,user.password,(err,result)=>{
+                if(err){
+                    res.json({
+                        msg: "password doesn't match"
+                    })
+                }
+                if(result){
+                    res.json({
+                        user: result
+                    })
+                }
+            })
+
+        }
+        else{
+           res.json({
+               msg: "Donar can't find here"
+           })
+        }
+    })
+}
+
 module.exports = {
     nameCont, postSignupController
 
