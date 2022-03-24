@@ -1,6 +1,6 @@
 const express = require('express')
 const bcrypt = require('bcrypt')
-const User = require('../Models/UserModel')
+const User = require('../Models/User')
 const { json } = require('body-parser')
 const { set } = require('mongoose')
 
@@ -61,7 +61,9 @@ const postLoginController = (req,res)=>{
                     })
                 }
                 if(result){
+                    console.log("Login successfully")
                     res.json({
+                        msg: "user find here",
                         user: result
                     })
                 }
@@ -77,6 +79,6 @@ const postLoginController = (req,res)=>{
 }
 
 module.exports = {
-    nameCont, postSignupController
+    nameCont, postSignupController,postLoginController
 
 }

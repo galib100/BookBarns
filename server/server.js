@@ -4,11 +4,19 @@ const bodyParser = require('body-parser');
 const app = express();
 const cors = require('cors');
 const UserRoutes = require('./routes/users')
+const authRoutes = require('./routes/auth');
+const productRoutes = require('./routes/product');
+const cartRoutes = require('./routes/cart');
+const orderRoutes = require('./routes/order');
 app.use(cors());
 app.use(express.json());
 
+app.use('/api/auth',authRoutes);
+app.use('/users',UserRoutes);
+app.use('/api/products',productRoutes);
+app.use('/api/carts',cartRoutes);
+app.use('/api/orders',orderRoutes);
 
-app.use('/api',UserRoutes);
 app.get('/', (req, res) => {
     res.send("hey boy glaib vai");
 })
