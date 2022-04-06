@@ -86,7 +86,7 @@ function ViewBooks({
     <>
       {/* ==================== React Helmet =================== */}
       <Helmet>
-        <title>Obosor | {heading}</title>
+        <title>BookBarns | {heading}</title>
         <meta name="desciption" content={`${heading} books`} />
       </Helmet>
       {/* ==================== Navigation =================== */}

@@ -94,7 +94,7 @@ const Items = ({
             <Card.Img variant="top" src={img1} className={Style.img_icon} />
             <Card.Title className={Style.item_text}>
               {" "}
-              Obosor Best seller{" "}
+              BookBarns Best seller{" "}
             </Card.Title>
             <Link to="/BestSeller">
               {" "}
@@ -163,7 +163,7 @@ const Items = ({
       {/* ============ BEST SELLER =========== */}
       <Row className={`${Style.booksRow}`}>
         <Col>
-          <h4 className={Style.item_header}>Obosor Best seller</h4>
+          <h4 className={Style.item_header}>BookBarns Best seller</h4>
         </Col>
         <Col>
           <Link to="/BestSeller">

@@ -28,19 +28,19 @@ export const sliderItems = [
       id: 1,
       img: "https://ds.rokomari.store/rokomari110/banner/4f564e95-5498-4af8-8881-5d811bd2fb7e.png",
       title: "ইসলামি আদর্শ ও মতবাদ",
-      cat:"women"
+      cat:"islamic"
     },
     {
       id: 2,
       img: "https://ds.rokomari.store/rokomari110/ProductNew20190903/130X186/Onnomonoshko-Zunayed_Evan-2b9f5-224838.jpg",
       title: "সকল গল্পের বই ",
-      cat:"coat"
+      cat:"story"
     },
     {
       id: 3,
       img: "https://ds.rokomari.store/rokomari110/ProductNew20190903/130X186/Astrophysics__Sohoj_Path-Gregory_Mone-7f274-222047.jpg",
       title: "বিজ্ঞান গণিত প্রযুক্তি ",
-      cat:"jeans"
+      cat:"science"
     },
   ];
 

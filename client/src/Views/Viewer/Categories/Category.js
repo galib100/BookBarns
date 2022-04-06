@@ -70,7 +70,7 @@ function Category({ savedBooks, saveBooksToStore }) {
   return (
     <>
     <Helmet>
-      <title>Obosor-{location.pathname.split("/")[2]}</title>
+      <title>BookBarns-{location.pathname.split("/")[2]}</title>
       <meta name="desciption" content={`Top ${location.pathname.split("/")[2]} books`} />
     </Helmet>
       <Nav1 />

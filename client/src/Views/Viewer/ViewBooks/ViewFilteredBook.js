@@ -70,7 +70,7 @@ function ViewFilteredBook({savedBooks, saveBooksToStore}) {
 
   return <div>
       <Helmet>
-        <title>Obosor-Books</title>
+        <title>BookBarns-Books</title>
         <meta name="desciption" content={`books`} />
       </Helmet>
       {/* ==================== Navigation =================== */}

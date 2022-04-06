@@ -9,6 +9,9 @@ import { IoMdList } from "react-icons/io";
 import Style from "./BannerForLandingPage.module.css";
 import axios from "axios";
 import { BASE_URL } from "../../../Constants/URL";
+import img1 from "../../../Assets/Viewer/Landing/4.jpg"
+import img2 from "../../../Assets/Viewer/Landing/5.jpg"
+import img3 from "../../../Assets/Viewer/Landing/6.jpg"
 // COMPONENTS
 import RequestABook from "./RequestABook";
 import CategoriesForMobile from "./CategoriesForMobile";
@@ -109,34 +112,39 @@ const BannerForLandingPage = ({
           {/* ///////////////////////////////////////////////// */}
           {/* /////////////////// carousel //////////////// */}
           <Col className={Style.carouselCont}>
-            {!carouselLoading ? (
+            
               <Carousel>
-                {banneradds.length > 0 &&
-                  banneradds.map((add) => (
+     
+                 
                     <Carousel.Item interval={2000}>
                       <a
-                        href={add.link !== "" ? `${add.link}` : `/`}
+                        href='/'
                         className={Style.carouselImaageBlock}
                         target="_blank"
                       >
                         <img
                           className="d-block w-100"
-                          src={`${BASE_URL}/${add.image}`}
+                          src={img1}
                           alt="First slide"
                         />
                       </a>
                     </Carousel.Item>
-                  ))}
+                    <Carousel.Item interval={2000}>
+                      <a
+                        href='/'
+                        className={Style.carouselImaageBlock}
+                        target="_blank"
+                      >
+                        <img
+                          className="d-block w-100"
+                          src={img2}
+                          alt="First slide"
+                        />
+                      </a>
+                    </Carousel.Item>
               </Carousel>
-            ) : (
-              <div className={Style.carouselLoading}>
-                {window.innerWidth >= 500 ? (
-                  <Skeleton width={`100%`} height={`65vh`} />
-                ) : (
-                  <Skeleton width={`100%`} height={`35vh`} />
-                )}
-              </div>
-            )}
+        
+      
           </Col>
 
           {/* ///////////////////////////////////////////////// */}

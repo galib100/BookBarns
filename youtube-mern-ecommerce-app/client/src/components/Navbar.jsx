@@ -5,9 +5,11 @@ import styled from "styled-components";
 import { mobile } from "../responsive";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import logo1 from "../assets/watermark.png"
+import Style from "./Navbar.module.css"
 
 const Container = styled.div`
-  height: 60px;
+  height: 80px; 
   ${mobile({ height: "50px" })}
 `;
 
@@ -25,10 +27,12 @@ const Left = styled.div`
   align-items: center;
 `;
 
-const Language = styled.span`
-  font-size: 14px;
+const Logo = styled.span`
   cursor: pointer;
-  ${mobile({ display: "none" })}
+  width: 100px;
+  height: 100px;
+  background:'0000';
+  
 `;
 
 const SearchContainer = styled.div`
@@ -45,14 +49,14 @@ const Input = styled.input`
 `;
 
 const Center = styled.div`
-  flex: 1;
-  text-align: center;
+flex: 1;
+display: flex;
+align-items: center;
+justify-content: flex-end;
+${mobile({ flex: 2, justifyContent: "center" })}
+
 `;
 
-const Logo = styled.h1`
-  font-weight: bold;
-  ${mobile({ fontSize: "24px" })}
-`;
 const Right = styled.div`
   flex: 1;
   display: flex;
@@ -69,34 +73,44 @@ const MenuItem = styled.div`
 `;
 
 const Navbar = () => {
-  const quantity = useSelector(state=>state.cart.quantity)
+  const quantity = useSelector(state => state.cart.quantity)
   return (
     <Container>
       <Wrapper>
         <Left>
-          <Language>EN</Language>
+          <Logo>
+            <Link to="/">
+            <img src={logo1} alt='Logog' width={70} height={50} />
+            </Link>
+
+          </Logo>
           <SearchContainer>
             <Input placeholder="Search" />
             <Search style={{ color: "gray", fontSize: 16 }} />
           </SearchContainer>
         </Left>
         <Center>
-          <Logo>LAMA.</Logo>
-        </Center>
-        <Right>
-     
-       <MenuItem>  <Link to="/register">REGISTER</Link></MenuItem>
-      
-      <Link to="/login">
-      <MenuItem>SIGN IN</MenuItem>
+          <Link to="/">  <MenuItem> Home</MenuItem> </Link>
+          <Link to="/about"><MenuItem>About Us  </MenuItem></Link>
+          <Link to="/contact"> <MenuItem> Contact Us  </MenuItem></Link>
+          {/* <MenuItem> <Link to="/">Home </Link> </MenuItem> */}
 
-      </Link>   
+        </Center>
+
+        <Right>
+
+          <MenuItem>  <Link to="/register">REGISTER</Link></MenuItem>
+
+          <Link to="/login">
+            <MenuItem>SIGN IN</MenuItem>
+
+          </Link>
           <Link to="/cart">
-          <MenuItem>
-            <Badge badgeContent={quantity} color="primary">
-              <ShoppingCartOutlined />
-            </Badge>
-          </MenuItem>
+            <MenuItem>
+              <Badge badgeContent={quantity} color="primary">
+                <ShoppingCartOutlined />
+              </Badge>
+            </MenuItem>
           </Link>
         </Right>
       </Wrapper>

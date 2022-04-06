@@ -37,8 +37,8 @@ function Categories({ categoriesOfBooks }) {
   return (
     <>
       <Helmet>
-        <title>Obosor | Category</title>
-        <meta name="desciption" content={`Obosor Categories.`} />
+        <title>BookBarns | Category</title>
+        <meta name="desciption" content={`BookBarns Categories.`} />
       </Helmet>
       <Nav1 />
       <div className={Style.categoriesContainer}>
