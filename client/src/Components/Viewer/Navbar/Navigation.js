@@ -127,9 +127,9 @@ function Navigation({
                 <img
                   alt="BookBarns"
                   src={brandLogo}
-                  width="75"
-                  height="75"
-                  className="pb-2"
+                  width={"100px"}
+                  height="100px"
+                  className="m-2"
                 />
                 {/* <span>BookBarns</s> */}
               </Link>

@@ -15,12 +15,18 @@ import { Footer } from "../../../Components/Viewer/Footer";
 import BookCardLoading from "../../../Components/Viewer/Book/BookCardLoading";
 import BookCard from "../../../Components/Viewer/Book/BookCard";
 import { Helmet } from "react-helmet";
-
+import ReactPaginate from 'react-paginate'
 function Category({ savedBooks, saveBooksToStore }) {
   const location = useLocation();
   const [loading, setLoading] = useState(false);
   const [fBooks, setFbooks] = useState([]);
+  const [range1, setRange1] = useState(0);
 
+  // handlePageClick
+  const handlePageClick = (data)=>{
+    console.log(data.selected)
+    setRange1(range1+10)
+  }
   // FILTER BOOKS ACCORDING TO CATEGORY & SUBCATEGORY
   const filterBooks = (books, filterIn, filterBy) => {
     let filteredBooks = [];
@@ -124,7 +130,7 @@ function Category({ savedBooks, saveBooksToStore }) {
             fBooks.length > 0 ? (
               <div className={Style.itemContainerr}>
                 {fBooks &&
-                  fBooks.map((book) => (
+                  fBooks.slice(range1,range1+10).map((book) => (
                     <div className={Style.viewBookContForBook}>
                       <BookCard key={book.id} item={book} />
                     </div>
@@ -148,6 +154,27 @@ function Category({ savedBooks, saveBooksToStore }) {
           )}
         </div>
       </div>
+      {/* Pagination are start here  */}
+      <ReactPaginate
+      previousLabel={'<<'}
+      nextLabel={'>>'}
+      pageCount={(fBooks.length)/10}
+      breakLabel={'...'}
+      marginPagesDisplayed={2}
+      pageRangeDisplayed={3}
+      onPageChange={handlePageClick}
+      containerClassName={'pagination'}
+      pageClassName={'page-item'}
+      pageLinkClassName={'page-link'}
+      previousClassName={'page-item'}
+      previousLinkClassName={'page-link'}
+      nextClassName={'page-item'}
+      nextLinkClassName={'page-link'}
+      breakClassName={'page-item'}
+      breakLinkClassName={'page-link'}
+      activeClassName={'active'}
+      />
+       
       <Footer />
     </>
   );

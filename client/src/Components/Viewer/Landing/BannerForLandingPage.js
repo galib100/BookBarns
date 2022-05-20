@@ -12,6 +12,8 @@ import { BASE_URL } from "../../../Constants/URL";
 import img1 from "../../../Assets/Viewer/Landing/4.jpg"
 import img2 from "../../../Assets/Viewer/Landing/5.jpg"
 import img3 from "../../../Assets/Viewer/Landing/6.jpg"
+import { sImage } from "./data"
+import Carou from "./Carou";
 // COMPONENTS
 import RequestABook from "./RequestABook";
 import CategoriesForMobile from "./CategoriesForMobile";
@@ -27,6 +29,18 @@ const BannerForLandingPage = ({
   const [carouselLoading, setCarouselLoading] = useState(false);
   const [showCardForRequest, setShowCardForRequest] = useState(false);
   const [banneradds, setBanneradds] = useState([]);
+
+  // carousel 
+
+
+
+  // axios
+  //     .get(`${BASE_URL}/api/admin/allBooks`)
+  //     .then((res) => {
+  //       const actualData = res.data.books.filter(
+  //         (item) => item.deleted !== true
+  //       );
+  //       })
 
   // CONTROL MODAL
   const controlModalFunc = () => {
@@ -59,49 +73,49 @@ const BannerForLandingPage = ({
           {/* /////////////////// Categories //////////////// */}
           {!categeroyLoading ? (
             <Col xs={3} className={Style.lcategories}>
-                <div className={Style.dropDown}>
-                  <i className="pr-2 fa-lg"><IoMdList /></i><span>Browse categories</span>
-                </div>
-                
-                <div className={`${Style.scrollablemenu}`}>
-                  {categoriesOfBooks &&
-                    categoriesOfBooks.map((cata) => {
-                      return (
-                        <div className={`${Style.dpItem}`}>
-                          {/* category name */}
-                          <Link to={`/category/${cata.category}`}>
-                            <div>{cata.category}</div>
-                            <div className={`${Style.logo}`}>
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="15"
-                                height="15"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                className="feather feather-chevron-right"
-                              >
-                                <polyline points="9 18 15 12 9 6"></polyline>
-                              </svg>
-                            </div>
-                          </Link>
-                          {/* sub category name */}
-                          <div className={Style.dpItemSubCategory}>
-                            {cata.subCategory && cata.subCategory.length > 0
-                              ? cata.subCategory.map((subcata) => (
-                                  <Link to={`/sub-category/${subcata}`}>
-                                    {subcata}
-                                  </Link>
-                                ))
-                              : null}
+              <div className={Style.dropDown}>
+                <i className="pr-2 fa-lg"><IoMdList /></i><span>Browse categories</span>
+              </div>
+
+              <div className={`${Style.scrollablemenu}`}>
+                {categoriesOfBooks &&
+                  categoriesOfBooks.map((cata) => {
+                    return (
+                      <div className={`${Style.dpItem}`}>
+                        {/* category name */}
+                        <Link to={`/category/${cata.category}`}>
+                          <div>{cata.category}</div>
+                          <div className={`${Style.logo}`}>
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="15"
+                              height="15"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              className="feather feather-chevron-right"
+                            >
+                              <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
                           </div>
+                        </Link>
+                        {/* sub category name */}
+                        <div className={Style.dpItemSubCategory}>
+                          {cata.subCategory && cata.subCategory.length > 0
+                            ? cata.subCategory.map((subcata) => (
+                              <Link to={`/sub-category/${subcata}`}>
+                                {subcata}
+                              </Link>
+                            ))
+                            : null}
                         </div>
-                      );
-                    })}
-                </div>
+                      </div>
+                    );
+                  })}
+              </div>
             </Col>
           ) : (
             <Col xs={3} className={Style.lcategories}>
@@ -112,11 +126,66 @@ const BannerForLandingPage = ({
           {/* ///////////////////////////////////////////////// */}
           {/* /////////////////// carousel //////////////// */}
           <Col className={Style.carouselCont}>
-            
-              <Carousel>
-     
-                 
-                    <Carousel.Item interval={2000}>
+
+            <Carousel>
+              {/* <h4> slide are here </h4> */}
+              {/* <Carou />  */}
+             { sImage.map((pic)=>(
+               <Carousel.Item interval={2000}>
+
+               <a
+                 href='/'
+                 className={Style.carouselImaageBlock}
+                 target="_blank"
+               >
+                 <img
+                   className="d-block w-100"
+                   src={`${BASE_URL}/BookImage/${pic}`}
+                  //  src={pic}
+                   alt="First slide"
+                 />
+               </a>
+             </Carousel.Item>
+              ))}
+              
+             
+              {/* <Carousel.Item interval={2000}>
+
+                <a
+                  href='/'
+                  className={Style.carouselImaageBlock}
+                  target="_blank"
+                >
+                  <img
+                    className="d-block w-100"
+                    // src={`${BASE_URL}/BookImage/${pic}`}
+                    src={'https://api.obosor.shop/BookImage/1635796650010APS002.jpg'}
+                    alt="First slide"
+                  />
+                </a>
+              </Carousel.Item> */}
+              {/* <h1> hi Galib{pic}</h1> */}
+
+
+              {/* </>})} */}
+              {/* actualData.slice(0,4).map((item)=>
+
+                <Carousel.Item interval={2000}>
+                      <a
+                        href='/'
+                        className={Style.carouselImaageBlock}
+                        target="_blank"
+                      >
+                        <img
+                          className="d-block w-100"
+                          src={`${BASE_URL}/${item.image}`}
+                          alt="First slide"
+                        />
+                      </a>
+                    </Carousel.Item>
+              ) */}
+
+              {/* <Carousel.Item interval={2000}>
                       <a
                         href='/'
                         className={Style.carouselImaageBlock}
@@ -128,23 +197,10 @@ const BannerForLandingPage = ({
                           alt="First slide"
                         />
                       </a>
-                    </Carousel.Item>
-                    <Carousel.Item interval={2000}>
-                      <a
-                        href='/'
-                        className={Style.carouselImaageBlock}
-                        target="_blank"
-                      >
-                        <img
-                          className="d-block w-100"
-                          src={img2}
-                          alt="First slide"
-                        />
-                      </a>
-                    </Carousel.Item>
-              </Carousel>
-        
-      
+                    </Carousel.Item> */}
+            </Carousel>
+
+
           </Col>
 
           {/* ///////////////////////////////////////////////// */}
